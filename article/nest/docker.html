@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>NestJS + Docker 生产环境部署 | 大楼のBlog</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/blog/favicon.ico">
+    <meta name="description" content="小时候梦想能仗剑走天涯，现在愿望是自驾318。">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.ee255dff.css" as="style"><link rel="preload" href="/blog/assets/js/app.d9f1916b.js" as="script"><link rel="preload" href="/blog/assets/js/7.904774fa.js" as="script"><link rel="preload" href="/blog/assets/js/2.412c0669.js" as="script"><link rel="preload" href="/blog/assets/js/1.78935ad8.js" as="script"><link rel="preload" href="/blog/assets/js/80.12acb350.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.276f9ad5.js"><link rel="prefetch" href="/blog/assets/js/100.8079de71.js"><link rel="prefetch" href="/blog/assets/js/101.2b29b6b6.js"><link rel="prefetch" href="/blog/assets/js/102.0996c4f1.js"><link rel="prefetch" href="/blog/assets/js/103.9d90c0c2.js"><link rel="prefetch" href="/blog/assets/js/104.0e231b3c.js"><link rel="prefetch" href="/blog/assets/js/105.ce92d7c8.js"><link rel="prefetch" href="/blog/assets/js/106.0ac74d8b.js"><link rel="prefetch" href="/blog/assets/js/107.b9e6dc79.js"><link rel="prefetch" href="/blog/assets/js/108.7edc3c95.js"><link rel="prefetch" href="/blog/assets/js/109.1a7e79e3.js"><link rel="prefetch" href="/blog/assets/js/11.46150e98.js"><link rel="prefetch" href="/blog/assets/js/110.ed39d2d1.js"><link rel="prefetch" href="/blog/assets/js/111.086cbb7e.js"><link rel="prefetch" href="/blog/assets/js/112.454d4558.js"><link rel="prefetch" href="/blog/assets/js/113.ce7f3a1a.js"><link rel="prefetch" href="/blog/assets/js/114.55818be5.js"><link rel="prefetch" href="/blog/assets/js/115.14133cc8.js"><link rel="prefetch" href="/blog/assets/js/116.27a79d65.js"><link rel="prefetch" href="/blog/assets/js/117.dabc4b17.js"><link rel="prefetch" href="/blog/assets/js/118.4eb242cc.js"><link rel="prefetch" href="/blog/assets/js/119.c4caaa7e.js"><link rel="prefetch" href="/blog/assets/js/120.7062fa97.js"><link rel="prefetch" href="/blog/assets/js/121.ea2bd082.js"><link rel="prefetch" href="/blog/assets/js/122.e0fb50ec.js"><link rel="prefetch" href="/blog/assets/js/123.e8f93dc8.js"><link rel="prefetch" href="/blog/assets/js/124.1db25f19.js"><link rel="prefetch" href="/blog/assets/js/125.ea528cf7.js"><link rel="prefetch" href="/blog/assets/js/126.08853775.js"><link rel="prefetch" href="/blog/assets/js/14.1202a963.js"><link rel="prefetch" href="/blog/assets/js/15.41a05e59.js"><link rel="prefetch" href="/blog/assets/js/16.9cea7118.js"><link rel="prefetch" href="/blog/assets/js/17.c71f2f42.js"><link rel="prefetch" href="/blog/assets/js/18.4959dd42.js"><link rel="prefetch" href="/blog/assets/js/19.d11089f9.js"><link rel="prefetch" href="/blog/assets/js/20.bd9f1c56.js"><link rel="prefetch" href="/blog/assets/js/21.4b093b38.js"><link rel="prefetch" href="/blog/assets/js/22.e24c9220.js"><link rel="prefetch" href="/blog/assets/js/23.9e373ea4.js"><link rel="prefetch" href="/blog/assets/js/24.c524cd02.js"><link rel="prefetch" href="/blog/assets/js/25.a873c6d1.js"><link rel="prefetch" href="/blog/assets/js/26.80934b62.js"><link rel="prefetch" href="/blog/assets/js/27.4ead19bf.js"><link rel="prefetch" href="/blog/assets/js/28.f42845ef.js"><link rel="prefetch" href="/blog/assets/js/29.f3a4e922.js"><link rel="prefetch" href="/blog/assets/js/3.af72d276.js"><link rel="prefetch" href="/blog/assets/js/30.66738f99.js"><link rel="prefetch" href="/blog/assets/js/31.fd5c06fc.js"><link rel="prefetch" href="/blog/assets/js/32.fabd7618.js"><link rel="prefetch" href="/blog/assets/js/33.037158bf.js"><link rel="prefetch" href="/blog/assets/js/34.8cdce2d4.js"><link rel="prefetch" href="/blog/assets/js/35.e9005675.js"><link rel="prefetch" href="/blog/assets/js/36.9ca4d216.js"><link rel="prefetch" href="/blog/assets/js/37.d641a971.js"><link rel="prefetch" href="/blog/assets/js/38.11f5bf85.js"><link rel="prefetch" href="/blog/assets/js/39.25c91267.js"><link rel="prefetch" href="/blog/assets/js/4.45be71ff.js"><link rel="prefetch" href="/blog/assets/js/40.12e0fca6.js"><link rel="prefetch" href="/blog/assets/js/41.09699d26.js"><link rel="prefetch" href="/blog/assets/js/42.f2a43a53.js"><link rel="prefetch" href="/blog/assets/js/43.cb66d995.js"><link rel="prefetch" href="/blog/assets/js/44.ff7808b1.js"><link rel="prefetch" href="/blog/assets/js/45.d4085a02.js"><link rel="prefetch" href="/blog/assets/js/46.4100bb4d.js"><link rel="prefetch" href="/blog/assets/js/47.eb3e8f8e.js"><link rel="prefetch" href="/blog/assets/js/48.82050622.js"><link rel="prefetch" href="/blog/assets/js/49.399e74e2.js"><link rel="prefetch" href="/blog/assets/js/5.ef80b954.js"><link rel="prefetch" href="/blog/assets/js/50.b2f2991b.js"><link rel="prefetch" href="/blog/assets/js/51.bcc89233.js"><link rel="prefetch" href="/blog/assets/js/52.e8deded4.js"><link rel="prefetch" href="/blog/assets/js/53.b958679f.js"><link rel="prefetch" href="/blog/assets/js/54.f256e417.js"><link rel="prefetch" href="/blog/assets/js/55.8c0ad948.js"><link rel="prefetch" href="/blog/assets/js/56.571191e0.js"><link rel="prefetch" href="/blog/assets/js/57.770c6b4d.js"><link rel="prefetch" href="/blog/assets/js/58.2fafd7d2.js"><link rel="prefetch" href="/blog/assets/js/59.fbc4c07a.js"><link rel="prefetch" href="/blog/assets/js/6.5e3616a4.js"><link rel="prefetch" href="/blog/assets/js/60.d7b6551b.js"><link rel="prefetch" href="/blog/assets/js/61.571eba71.js"><link rel="prefetch" href="/blog/assets/js/62.0edf5e26.js"><link rel="prefetch" href="/blog/assets/js/63.8291b4c1.js"><link rel="prefetch" href="/blog/assets/js/64.1b1a570a.js"><link rel="prefetch" href="/blog/assets/js/65.c8fd893d.js"><link rel="prefetch" href="/blog/assets/js/66.430f82e9.js"><link rel="prefetch" href="/blog/assets/js/67.3bb3eadc.js"><link rel="prefetch" href="/blog/assets/js/68.d4288466.js"><link rel="prefetch" href="/blog/assets/js/69.71115584.js"><link rel="prefetch" href="/blog/assets/js/70.34229f01.js"><link rel="prefetch" href="/blog/assets/js/71.9db809d9.js"><link rel="prefetch" href="/blog/assets/js/72.fbb51636.js"><link rel="prefetch" href="/blog/assets/js/73.ea58197b.js"><link rel="prefetch" href="/blog/assets/js/74.d3bf5f61.js"><link rel="prefetch" href="/blog/assets/js/75.1a34c5dd.js"><link rel="prefetch" href="/blog/assets/js/76.a0546862.js"><link rel="prefetch" href="/blog/assets/js/77.7f183461.js"><link rel="prefetch" href="/blog/assets/js/78.a79f38f4.js"><link rel="prefetch" href="/blog/assets/js/79.bac338c7.js"><link rel="prefetch" href="/blog/assets/js/8.1cb509a3.js"><link rel="prefetch" href="/blog/assets/js/81.2d14fd0e.js"><link rel="prefetch" href="/blog/assets/js/82.5e2527a4.js"><link rel="prefetch" href="/blog/assets/js/83.4e29a236.js"><link rel="prefetch" href="/blog/assets/js/84.29e49c84.js"><link rel="prefetch" href="/blog/assets/js/85.bc4bc26a.js"><link rel="prefetch" href="/blog/assets/js/86.185dfdf2.js"><link rel="prefetch" href="/blog/assets/js/87.d7ee6fa9.js"><link rel="prefetch" href="/blog/assets/js/88.48c6a155.js"><link rel="prefetch" href="/blog/assets/js/89.3dd34aa7.js"><link rel="prefetch" href="/blog/assets/js/9.58eab764.js"><link rel="prefetch" href="/blog/assets/js/90.17851d51.js"><link rel="prefetch" href="/blog/assets/js/91.150cb11c.js"><link rel="prefetch" href="/blog/assets/js/92.b0ff8cca.js"><link rel="prefetch" href="/blog/assets/js/93.5478171d.js"><link rel="prefetch" href="/blog/assets/js/94.30bb28a0.js"><link rel="prefetch" href="/blog/assets/js/95.7b0a630e.js"><link rel="prefetch" href="/blog/assets/js/96.e8e3d0bd.js"><link rel="prefetch" href="/blog/assets/js/97.3ec69f88.js"><link rel="prefetch" href="/blog/assets/js/98.0ec5a8c8.js"><link rel="prefetch" href="/blog/assets/js/99.b4bf7af8.js"><link rel="prefetch" href="/blog/assets/js/vendors~docsearch.8567a2bd.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.ee255dff.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>大楼のBlog</h3> <p class="description" data-v-59e6cb88>小时候梦想能仗剑走天涯，现在愿望是自驾318。</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>大楼</span>
+          
+        <span data-v-59e6cb88>2019 - </span>
+        2026
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><img src="/blog/favicon.ico" alt="大楼のBlog" class="logo"> <span class="site-name">大楼のBlog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link"><i class="iconfont reco-home"></i>
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/categories/AI-浪潮/" class="nav-link"><i class="undefined"></i>
+  AI-浪潮
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/前端沉淀/" class="nav-link"><i class="undefined"></i>
+  前端沉淀
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/后端扩展/" class="nav-link"><i class="undefined"></i>
+  后端扩展
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/React框架/" class="nav-link"><i class="undefined"></i>
+  React框架
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/Vue框架/" class="nav-link"><i class="undefined"></i>
+  Vue框架
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/畅想生活/" class="nav-link"><i class="undefined"></i>
+  畅想生活
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/blog/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-menu"></i>
+      神器
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>在线生成</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://cli.im/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  二维码生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.logosc.cn/logo/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Logo生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://cron.qqe2.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Cron生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.pdfpai.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  在线PDF工具
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>在线转换</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://tool.oschina.net/codeformat/html" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  在线代码格式化
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.beijing-time.org/shijianchuo/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  时间戳转换
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/jsoneditoronline/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Json编辑器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/convert/image_to_svg/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  png转svg
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>在线服务</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.logosc.cn/so/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  图片搜索
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.youcompress.com/zh-cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  图片压缩
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>AI-资源</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://claudecode.tangshuang.net/tutorial" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  claude-code
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bigmodel.cn/glm-coding?ic=5AH7ATEZSC&amp;closedialog=true" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  智普模型
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://docs.n1n.ai/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  n1n接口平台
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/dalou123/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://193.112.101.157:8080/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-theme"></i>
+  Dalou-ui
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://193.112.101.157/app/index" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-blog"></i>
+  Dalou-blog
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/blog/images/sgns02.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    大楼
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>88</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>31</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link"><i class="iconfont reco-home"></i>
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/categories/AI-浪潮/" class="nav-link"><i class="undefined"></i>
+  AI-浪潮
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/前端沉淀/" class="nav-link"><i class="undefined"></i>
+  前端沉淀
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/后端扩展/" class="nav-link"><i class="undefined"></i>
+  后端扩展
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/React框架/" class="nav-link"><i class="undefined"></i>
+  React框架
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/Vue框架/" class="nav-link"><i class="undefined"></i>
+  Vue框架
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/畅想生活/" class="nav-link"><i class="undefined"></i>
+  畅想生活
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/blog/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-menu"></i>
+      神器
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>在线生成</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://cli.im/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  二维码生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.logosc.cn/logo/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Logo生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://cron.qqe2.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Cron生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.pdfpai.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  在线PDF工具
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>在线转换</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://tool.oschina.net/codeformat/html" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  在线代码格式化
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.beijing-time.org/shijianchuo/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  时间戳转换
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/jsoneditoronline/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Json编辑器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/convert/image_to_svg/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  png转svg
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>在线服务</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.logosc.cn/so/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  图片搜索
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.youcompress.com/zh-cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  图片压缩
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>AI-资源</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://claudecode.tangshuang.net/tutorial" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  claude-code
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bigmodel.cn/glm-coding?ic=5AH7ATEZSC&amp;closedialog=true" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  智普模型
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://docs.n1n.ai/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  n1n接口平台
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/dalou123/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://193.112.101.157:8080/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-theme"></i>
+  Dalou-ui
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://193.112.101.157/app/index" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-blog"></i>
+  Dalou-blog
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Vue框架</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>React框架</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>前端沉淀</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>后端扩展</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/article/mysql01.html" class="sidebar-link">mysql使用技巧</a></li><li><a href="/blog/article/mysql02.html" class="sidebar-link">mysql随记</a></li><li><a href="/blog/article/mysql03.html" class="sidebar-link">mysql关联查询</a></li><li><a href="/blog/article/nginx01.html" class="sidebar-link">nginx配置</a></li><li><a href="/blog/article/node/node02.html" class="sidebar-link">初识Node.js</a></li><li><a href="/blog/article/node/node01.html" class="sidebar-link">Node事件循环</a></li><li><a href="/blog/article/node/node03.html" class="sidebar-link">接口请求跨域</a></li><li><a href="/blog/article/node/node04.html" class="sidebar-link">Node中的path模块</a></li><li><a href="/blog/article/node/node05.html" class="sidebar-link">Node中的模块</a></li><li><a href="/blog/article/node/node06.html" class="sidebar-link">Node中创建线程</a></li><li><a href="/blog/article/node/node07.html" class="sidebar-link">SSE流式传输</a></li><li><a href="/blog/article/token01.html" class="sidebar-link">双token无感刷新</a></li><li><a href="/blog/article/pm2.html" class="sidebar-link">Node进程管理工具—pm2</a></li><li><a href="/blog/article/socket.html" class="sidebar-link">socket.io通讯</a></li><li><a href="/blog/article/nest/index1.html" class="sidebar-link">手搓Nest-blog后端服务(一)</a></li><li><a href="/blog/article/nest/index2.html" class="sidebar-link">手搓Nest-blog后端服务(二)</a></li><li><a href="/blog/article/nest/docker.html" aria-current="page" class="active sidebar-link">NestJS + Docker 生产环境部署</a></li><li><a href="/blog/article/nest/nest-prisma-pg.html" class="sidebar-link">NestJS + Prisma + PostgreSQ</a></li><li><a href="/blog/article/nest/nest-basics01.html" class="sidebar-link">NestJS 零基础入门实操文档</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>AI-浪潮</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>畅想生活</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>NestJS + Docker 生产环境部署</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>大楼</span>
+          
+        <span data-v-59e6cb88>2019 - </span>
+        2026
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">NestJS + Docker 生产环境部署</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>dalou</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2025/10/28</span></i> <!----> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>mysql</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="nestjs-docker-生产环境部署"><a href="#nestjs-docker-生产环境部署" class="header-anchor">#</a> NestJS + Docker 生产环境部署</h1> <p>技术栈：NestJS · Prisma 7 · PostgreSQL 18 · Docker · Docker Compose · Nginx 服务器：阿里云 / 腾讯云 Linux（Ubuntu 22.04） 目标：把本地开发好的项目完整部署到公网可访问的服务器</p> <hr> <h2 id="一、部署整体架构"><a href="#一、部署整体架构" class="header-anchor">#</a> 一、部署整体架构</h2> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>公网用户
+    ↓ HTTP/HTTPS 请求（80/443 端口）
+┌─────────────────────────────────┐
+│         Nginx 容器               │
+│   反向代理 + 静态文件 + SSL        │
+└────────────┬────────────────────┘
+             │ 转发到内部端口 3000
+┌────────────▼────────────────────┐
+│         NestJS 容器              │
+│       运行编译后的 dist/          │
+└────────────┬────────────────────┘
+             │ 内部网络连接
+┌────────────▼────────────────────┐
+│       PostgreSQL 18 容器         │
+│         数据持久化存储             │
+└─────────────────────────────────┘
+             ↕ 挂载
+┌─────────────────────────────────┐
+│      Docker Volume（数据卷）      │
+│   数据存在宿主机磁盘，容器重启不丢   │
+└─────────────────────────────────┘
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p><strong>为什么用 Docker？</strong></p> <ul><li>环境一致：本地和服务器运行环境完全相同，不会出现&quot;本地好用服务器报错&quot;</li> <li>隔离性：每个服务在自己的容器里，互不干扰</li> <li>方便迁移：换服务器只需把代码和 docker-compose.yml 复制过去，一条命令启动</li> <li>版本控制：通过镜像版本管理每次部署</li></ul> <hr> <h2 id="二、购买服务器"><a href="#二、购买服务器" class="header-anchor">#</a> 二、购买服务器</h2> <h3 id="推荐配置-个人玩法"><a href="#推荐配置-个人玩法" class="header-anchor">#</a> 推荐配置(个人玩法)</h3> <table><thead><tr><th>配置项</th> <th>推荐</th> <th>说明</th></tr></thead> <tbody><tr><td>CPU</td> <td>2 核</td> <td>1 核也能跑，但会卡</td></tr> <tr><td>内存</td> <td>2GB</td> <td>Docker + PostgreSQL + NestJS 最低要求</td></tr> <tr><td>硬盘</td> <td>40GB SSD</td> <td>系统 + Docker 镜像 + 数据库</td></tr> <tr><td>带宽</td> <td>3Mbps 以上</td> <td>够用</td></tr> <tr><td>操作系统</td> <td>Ubuntu 22.04 LTS</td> <td>本文档基于此系统</td></tr> <tr><td>地区</td> <td>按需选择</td> <td>国内用户选国内节点，速度快</td></tr></tbody></table> <hr> <h3 id="阿里云购买步骤"><a href="#阿里云购买步骤" class="header-anchor">#</a> 阿里云购买步骤</h3> <ol><li>访问 https://www.aliyun.com，注册并实名认证</li> <li>顶部菜单 → <strong>产品</strong> → <strong>云服务器 ECS</strong></li> <li>点击<strong>立即购买</strong>，选择配置：
+<ul><li>付费方式：<strong>按量付费</strong>（按小时计费，测试完随时释放，省钱）或<strong>包年包月</strong>（长期用）</li> <li>地域：选<strong>华东（上海）</strong> 或离你近的节点</li> <li>实例规格：<strong>2核2GB</strong>（ecs.t6-c1m2.large，约 0.15 元/小时）</li> <li>镜像：<strong>Ubuntu 22.04 LTS 64位</strong></li> <li>系统盘：<strong>40GB SSD</strong></li> <li>网络：<strong>按使用流量计费</strong>，带宽上限 5Mbps</li></ul></li> <li>设置登录方式：
+<ul><li>选<strong>密钥对</strong>（更安全，推荐）或<strong>自定义密码</strong></li> <li>如果选密码，设置一个强密码并记下来</li></ul></li> <li>安全组配置（<strong>关键步骤</strong>）：
+<ul><li>购买后进入 ECS 控制台 → 该实例 → <strong>安全组</strong> → <strong>配置规则</strong></li> <li>添加入方向规则：</li></ul></li></ol> <table><thead><tr><th>协议</th> <th>端口范围</th> <th>授权对象</th> <th>说明</th></tr></thead> <tbody><tr><td>TCP</td> <td>22</td> <td>0.0.0.0/0</td> <td>SSH 登录</td></tr> <tr><td>TCP</td> <td>80</td> <td>0.0.0.0/0</td> <td>HTTP 访问</td></tr> <tr><td>TCP</td> <td>443</td> <td>0.0.0.0/0</td> <td>HTTPS 访问</td></tr> <tr><td>TCP</td> <td>3000</td> <td>0.0.0.0/0</td> <td>NestJS 直接访问（测试用）</td></tr></tbody></table> <ol start="6"><li>购买完成后，在控制台找到服务器的<strong>公网 IP</strong>，记下来。</li></ol> <hr> <h3 id="腾讯云购买步骤"><a href="#腾讯云购买步骤" class="header-anchor">#</a> 腾讯云购买步骤</h3> <ol><li>访问 https://cloud.tencent.com，注册并实名认证</li> <li>顶部 → <strong>产品</strong> → <strong>云服务器 CVM</strong></li> <li>点击<strong>快速配置</strong>：
+<ul><li>地域：选<strong>广州</strong>或<strong>上海</strong></li> <li>机型：<strong>标准型 SA5</strong>，2核2GB（约 0.12 元/小时）</li> <li>镜像：<strong>Ubuntu Server 22.04 LTS 64位</strong></li> <li>系统盘：<strong>50GB SSD</strong></li> <li>公网带宽：<strong>按使用流量</strong>，5Mbps</li></ul></li> <li>设置密码（记下来）</li> <li>购买后在控制台找到<strong>公网 IP</strong></li></ol> <hr> <h2 id="三、服务器初始化配置"><a href="#三、服务器初始化配置" class="header-anchor">#</a> 三、服务器初始化配置</h2> <h3 id="连接服务器"><a href="#连接服务器" class="header-anchor">#</a> 连接服务器</h3> <p><strong>macOS / Linux：</strong></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 替换 your-server-ip 为你的服务器公网 IP</span>
+<span class="token function">ssh</span> root@your-server-ip
+
+<span class="token comment"># 如果用密钥对登录（阿里云下载的 .pem 文件）</span>
+<span class="token function">chmod</span> <span class="token number">400</span> your-key.pem
+<span class="token function">ssh</span> <span class="token parameter variable">-i</span> your-key.pem root@your-server-ip
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><strong>Windows：</strong> 推荐使用 <strong>MobaXterm</strong>（免费）或 <strong>Tabby</strong>：</p> <ul><li>下载 MobaXterm：https://mobaxterm.mobatek.net/download.html</li> <li>新建 SSH 会话，填入公网 IP 和 root 密码，连接</li></ul> <hr> <h3 id="系统初始化"><a href="#系统初始化" class="header-anchor">#</a> 系统初始化</h3> <p>连接成功后，依次执行：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 更新系统软件包索引</span>
+<span class="token function">apt</span> update
+
+<span class="token comment"># 升级已安装的软件包</span>
+<span class="token function">apt</span> upgrade <span class="token parameter variable">-y</span>
+
+<span class="token comment"># 安装常用工具</span>
+<span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token function">curl</span> <span class="token function">wget</span> <span class="token function">git</span> <span class="token function">vim</span> ufw
+
+<span class="token comment"># 设置时区为上海（北京时间）</span>
+timedatectl set-timezone Asia/Shanghai
+
+<span class="token comment"># 验证时区</span>
+<span class="token function">date</span>
+<span class="token comment"># 输出：Mon Sep 30 10:00:00 CST 2025</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="配置防火墙"><a href="#配置防火墙" class="header-anchor">#</a> 配置防火墙</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 开启防火墙</span>
+ufw <span class="token builtin class-name">enable</span>
+
+<span class="token comment"># 允许 SSH（必须先允许，否则下一步会断开连接）</span>
+ufw allow <span class="token number">22</span>
+
+<span class="token comment"># 允许 HTTP 和 HTTPS</span>
+ufw allow <span class="token number">80</span>
+ufw allow <span class="token number">443</span>
+
+<span class="token comment"># 允许 NestJS 端口（测试阶段用，上线后可关闭）</span>
+ufw allow <span class="token number">3000</span>
+
+<span class="token comment"># 查看防火墙状态</span>
+ufw status
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="创建普通用户-可选-更安全"><a href="#创建普通用户-可选-更安全" class="header-anchor">#</a> 创建普通用户（可选，更安全）</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 创建用户 deploy，以后用这个用户操作，不用 root</span>
+adduser deploy
+
+<span class="token comment"># 给 deploy 用户添加 sudo 权限</span>
+<span class="token function">usermod</span> <span class="token parameter variable">-aG</span> <span class="token function">sudo</span> deploy
+
+<span class="token comment"># 切换到 deploy 用户</span>
+<span class="token function">su</span> - deploy
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><hr> <h2 id="四、安装-docker-和-docker-compose"><a href="#四、安装-docker-和-docker-compose" class="header-anchor">#</a> 四、安装 Docker 和 Docker Compose</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 切换回 root 用户执行（或用 sudo）</span>
+<span class="token comment"># 一键安装 Docker（官方脚本）</span>
+<span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://get.docker.com <span class="token operator">|</span> <span class="token function">sh</span>
+
+<span class="token comment"># 把当前用户加入 docker 组（这样不需要每次都加 sudo）</span>
+<span class="token function">usermod</span> <span class="token parameter variable">-aG</span> <span class="token function">docker</span> <span class="token environment constant">$USER</span>
+
+<span class="token comment"># 重新加载用户组（让上面的设置生效）</span>
+newgrp <span class="token function">docker</span>
+
+<span class="token comment"># 验证 Docker 安装成功</span>
+<span class="token function">docker</span> <span class="token parameter variable">--version</span>
+<span class="token comment"># 输出：Docker version 27.x.x</span>
+
+<span class="token comment"># 验证 Docker Compose（Docker 27 以上已内置 docker compose 命令）</span>
+<span class="token function">docker</span> compose version
+<span class="token comment"># 输出：Docker Compose version v2.x.x</span>
+
+<span class="token comment"># 设置 Docker 开机自启</span>
+systemctl <span class="token builtin class-name">enable</span> <span class="token function">docker</span>
+systemctl start <span class="token function">docker</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p><strong>注意</strong>：如果服务器在国内，Docker Hub 拉取镜像可能很慢甚至失败。 配置国内镜像加速器：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 创建 Docker 配置目录</span>
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /etc/docker
+
+<span class="token comment"># 写入镜像加速配置</span>
+<span class="token function">cat</span> <span class="token operator">&gt;</span> /etc/docker/daemon.json <span class="token operator">&lt;&lt;</span> <span class="token string">'EOF'
+{
+  &quot;registry-mirrors&quot;: [
+    &quot;https://mirror.ccs.tencentyun.com&quot;,
+    &quot;https://docker.mirrors.ustc.edu.cn&quot;
+  ]
+}
+EOF</span>
+
+<span class="token comment"># 重启 Docker 使配置生效</span>
+systemctl daemon-reload
+systemctl restart <span class="token function">docker</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><hr> <h2 id="五、准备项目代码"><a href="#五、准备项目代码" class="header-anchor">#</a> 五、准备项目代码</h2> <p>在<strong>本地项目</strong>根目录，确认以下文件结构存在：</p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>nestjs-prisma7-demo/
+├── src/
+│   ├── generated/prisma/     ← 不要提交到 Git，.gitignore 里排除
+│   ├── prisma/
+│   │   ├── prisma.module.ts
+│   │   └── prisma.service.ts
+│   ├── user/
+│   ├── post/
+│   ├── app.module.ts
+│   └── main.ts
+├── prisma/
+│   ├── schema.prisma
+│   └── migrations/           ← 必须提交到 Git！迁移文件要上传
+├── prisma.config.ts
+├── package.json
+├── tsconfig.json
+└── nest-cli.json
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h3 id="检查-gitignore"><a href="#检查-gitignore" class="header-anchor">#</a> 检查 .gitignore</h3> <p>确认本地 <code>.gitignore</code> 包含以下内容：</p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code># .gitignore
+
+# 依赖包（服务器会重新安装）
+node_modules/
+
+# 编译产物（服务器会重新编译）
+dist/
+
+# 环境变量（敏感信息，绝对不能提交）
+.env
+.env.production
+
+# Prisma 生成的 Client（服务器会重新生成）
+src/generated/
+
+# 日志文件
+*.log
+npm-debug.log*
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><h3 id="初始化-git-并推送到代码仓库"><a href="#初始化-git-并推送到代码仓库" class="header-anchor">#</a> 初始化 Git 并推送到代码仓库</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 本地项目根目录执行</span>
+<span class="token function">git</span> init
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">&quot;初始化项目&quot;</span>
+
+<span class="token comment"># 推送到 GitHub / Gitee（选一个）</span>
+<span class="token comment"># GitHub：</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin https://github.com/你的用户名/nestjs-prisma7-demo.git
+<span class="token function">git</span> push <span class="token parameter variable">-u</span> origin main
+
+<span class="token comment"># Gitee（国内速度更快，推荐）：</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin https://gitee.com/你的用户名/nestjs-prisma7-demo.git
+<span class="token function">git</span> push <span class="token parameter variable">-u</span> origin main
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><hr> <h2 id="六、编写-dockerfile"><a href="#六、编写-dockerfile" class="header-anchor">#</a> 六、编写 Dockerfile</h2> <p>在项目根目录创建 <code>Dockerfile</code>：</p> <div class="language-dockerfile line-numbers-mode"><pre class="language-dockerfile"><code><span class="token comment"># Dockerfile</span>
+
+<span class="token comment"># ── 第一阶段：构建阶段（builder）────────────────────────────</span>
+<span class="token comment"># 使用 Node.js 20 Alpine 版本作为基础镜像</span>
+<span class="token comment"># Alpine 是精简版 Linux，镜像体积更小（约 50MB vs Ubuntu 的 200MB+）</span>
+<span class="token instruction"><span class="token keyword">FROM</span> node:20-alpine <span class="token keyword">AS</span> builder</span>
+
+<span class="token comment"># 设置工作目录（容器内的工作路径）</span>
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
+
+<span class="token comment"># 先单独复制 package.json 和 package-lock.json</span>
+<span class="token comment"># 好处：如果只改了业务代码，npm install 这层缓存不会失效，加快构建速度</span>
+<span class="token instruction"><span class="token keyword">COPY</span> package*.json ./</span>
+
+<span class="token comment"># 安装所有依赖（包括 devDependencies，因为构建需要 TypeScript 编译器）</span>
+<span class="token instruction"><span class="token keyword">RUN</span> npm install</span>
+
+<span class="token comment"># 复制 prisma 目录（包含 schema.prisma 和 migrations）</span>
+<span class="token instruction"><span class="token keyword">COPY</span> prisma ./prisma</span>
+
+<span class="token comment"># 复制 prisma.config.ts</span>
+<span class="token instruction"><span class="token keyword">COPY</span> prisma.config.ts ./</span>
+
+<span class="token comment"># 复制其余所有源代码</span>
+<span class="token instruction"><span class="token keyword">COPY</span> . .</span>
+
+<span class="token comment"># 生成 Prisma Client（根据 schema.prisma 生成 TypeScript 类型和查询代码）</span>
+<span class="token comment"># 生成位置：src/generated/prisma/</span>
+<span class="token instruction"><span class="token keyword">RUN</span> npx prisma generate</span>
+
+<span class="token comment"># 编译 TypeScript → JavaScript</span>
+<span class="token comment"># 编译产物输出到 dist/ 目录</span>
+<span class="token instruction"><span class="token keyword">RUN</span> npm run build</span>
+
+<span class="token comment"># ── 第二阶段：生产阶段（runner）─────────────────────────────</span>
+<span class="token comment"># 重新从干净的 Node.js 镜像开始，不包含构建工具</span>
+<span class="token comment"># 这样最终镜像只有运行所需的文件，体积更小、更安全</span>
+<span class="token instruction"><span class="token keyword">FROM</span> node:20-alpine <span class="token keyword">AS</span> runner</span>
+
+<span class="token comment"># 设置 Node.js 运行环境为生产模式</span>
+<span class="token comment"># 生产模式下 NestJS 会关闭调试输出，性能更好</span>
+<span class="token instruction"><span class="token keyword">ENV</span> NODE_ENV=production</span>
+
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
+
+<span class="token comment"># 从 builder 阶段复制 package.json（安装生产依赖需要）</span>
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">builder</span></span> /app/package*.json ./</span>
+
+<span class="token comment"># 只安装生产依赖（不安装 devDependencies，减小镜像体积）</span>
+<span class="token instruction"><span class="token keyword">RUN</span> npm install --only=production</span>
+
+<span class="token comment"># 从 builder 阶段复制编译好的 JavaScript 代码</span>
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">builder</span></span> /app/dist ./dist</span>
+
+<span class="token comment"># 从 builder 阶段复制 Prisma 生成的 Client 代码</span>
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">builder</span></span> /app/src/generated ./src/generated</span>
+
+<span class="token comment"># 从 builder 阶段复制 prisma 目录（迁移时需要）</span>
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">builder</span></span> /app/prisma ./prisma</span>
+
+<span class="token comment"># 从 builder 阶段复制 prisma.config.ts（Prisma 7 配置文件）</span>
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">builder</span></span> /app/prisma.config.ts ./</span>
+
+<span class="token comment"># 暴露 NestJS 服务端口</span>
+<span class="token comment"># EXPOSE 只是声明，实际端口映射在 docker-compose.yml 里配置</span>
+<span class="token instruction"><span class="token keyword">EXPOSE</span> 3000</span>
+
+<span class="token comment"># 启动命令：运行编译后的入口文件</span>
+<span class="token comment"># 注意：生产环境运行 dist/main.js，不是 ts-node src/main.ts</span>
+<span class="token instruction"><span class="token keyword">CMD</span> [<span class="token string">&quot;node&quot;</span>, <span class="token string">&quot;dist/main.js&quot;</span>]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br></div></div><hr> <h2 id="七、编写-docker-compose-yml"><a href="#七、编写-docker-compose-yml" class="header-anchor">#</a> 七、编写 docker-compose.yml</h2> <p>在项目根目录创建 <code>docker-compose.yml</code>：</p> <div class="language-yaml line-numbers-mode"><pre class="language-yaml"><code><span class="token comment"># docker-compose.yml</span>
+<span class="token comment"># 定义整个应用的所有服务（NestJS + PostgreSQL + Nginx）</span>
+
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3.8'</span>
+
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+
+  <span class="token comment"># ── PostgreSQL 18 数据库服务 ──────────────────────────────</span>
+  <span class="token key atrule">postgres</span><span class="token punctuation">:</span>
+    <span class="token comment"># 使用 PostgreSQL 18 官方镜像</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> postgres<span class="token punctuation">:</span>18<span class="token punctuation">-</span>alpine
+    <span class="token comment"># 容器名称（方便查看日志和进入容器）</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> nestjs_postgres
+    <span class="token comment"># 容器崩溃或服务器重启后自动重启（always = 始终重启）</span>
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token comment"># 环境变量（从 .env.production 文件读取）</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token comment"># 数据库超级用户名</span>
+      <span class="token key atrule">POSTGRES_USER</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>POSTGRES_USER<span class="token punctuation">}</span>
+      <span class="token comment"># 数据库超级用户密码</span>
+      <span class="token key atrule">POSTGRES_PASSWORD</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>POSTGRES_PASSWORD<span class="token punctuation">}</span>
+      <span class="token comment"># 自动创建的默认数据库名</span>
+      <span class="token key atrule">POSTGRES_DB</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>POSTGRES_DB<span class="token punctuation">}</span>
+    <span class="token comment"># 数据卷挂载：把数据库文件持久化到宿主机</span>
+    <span class="token comment"># 格式：宿主机路径或卷名:容器内路径</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> postgres_data<span class="token punctuation">:</span>/var/lib/postgresql/data
+    <span class="token comment"># 网络：加入 app-network 内部网络</span>
+    <span class="token comment"># PostgreSQL 不对外暴露端口，只在内网和 NestJS 通信（更安全）</span>
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> app<span class="token punctuation">-</span>network
+    <span class="token comment"># 健康检查：确认 PostgreSQL 真正可以接受连接后，NestJS 才启动</span>
+    <span class="token key atrule">healthcheck</span><span class="token punctuation">:</span>
+      <span class="token key atrule">test</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;CMD-SHELL&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}&quot;</span><span class="token punctuation">]</span>
+      <span class="token key atrule">interval</span><span class="token punctuation">:</span> 10s      <span class="token comment"># 每 10 秒检查一次</span>
+      <span class="token key atrule">timeout</span><span class="token punctuation">:</span> 5s        <span class="token comment"># 超时时间</span>
+      <span class="token key atrule">retries</span><span class="token punctuation">:</span> <span class="token number">5</span>         <span class="token comment"># 失败后重试 5 次</span>
+
+  <span class="token comment"># ── NestJS 应用服务 ──────────────────────────────────────</span>
+  <span class="token key atrule">nestjs</span><span class="token punctuation">:</span>
+    <span class="token comment"># build 表示用本地 Dockerfile 构建镜像，不是从镜像仓库拉取</span>
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">context</span><span class="token punctuation">:</span> .         <span class="token comment"># Dockerfile 所在目录（当前目录）</span>
+      <span class="token key atrule">dockerfile</span><span class="token punctuation">:</span> Dockerfile
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> nestjs_app
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token comment"># 从 .env.production 文件读取环境变量</span>
+    <span class="token key atrule">env_file</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> .env.production
+    <span class="token comment"># 端口映射：宿主机端口:容器端口</span>
+    <span class="token comment"># 宿主机 3000 → 容器 3000（可以直接用 IP:3000 访问，测试用）</span>
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token string">&quot;3000:3000&quot;</span>
+    <span class="token comment"># 依赖关系：等 postgres 服务健康检查通过后才启动 nestjs</span>
+    <span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+      <span class="token key atrule">postgres</span><span class="token punctuation">:</span>
+        <span class="token key atrule">condition</span><span class="token punctuation">:</span> service_healthy
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> app<span class="token punctuation">-</span>network
+
+  <span class="token comment"># ── Nginx 反向代理服务 ────────────────────────────────────</span>
+  <span class="token key atrule">nginx</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>alpine
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> nestjs_nginx
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token comment"># 对外暴露 80 端口（HTTP）</span>
+      <span class="token punctuation">-</span> <span class="token string">&quot;80:80&quot;</span>
+      <span class="token comment"># 对外暴露 443 端口（HTTPS，后续配置 SSL 证书用）</span>
+      <span class="token punctuation">-</span> <span class="token string">&quot;443:443&quot;</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token comment"># 挂载 Nginx 配置文件</span>
+      <span class="token punctuation">-</span> ./nginx/nginx.conf<span class="token punctuation">:</span>/etc/nginx/nginx.conf<span class="token punctuation">:</span>ro
+      <span class="token comment"># 挂载 SSL 证书目录（后续放证书用，现在先建好目录）</span>
+      <span class="token punctuation">-</span> ./nginx/ssl<span class="token punctuation">:</span>/etc/nginx/ssl<span class="token punctuation">:</span>ro
+    <span class="token comment"># Nginx 等 nestjs 启动后再启动</span>
+    <span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> nestjs
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> app<span class="token punctuation">-</span>network
+
+<span class="token comment"># ── 数据卷定义 ────────────────────────────────────────────</span>
+<span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+  <span class="token comment"># postgres_data：PostgreSQL 数据持久化卷</span>
+  <span class="token comment"># Docker 自动管理存储位置（通常在 /var/lib/docker/volumes/）</span>
+  <span class="token key atrule">postgres_data</span><span class="token punctuation">:</span>
+    <span class="token key atrule">driver</span><span class="token punctuation">:</span> local
+
+<span class="token comment"># ── 网络定义 ──────────────────────────────────────────────</span>
+<span class="token key atrule">networks</span><span class="token punctuation">:</span>
+  <span class="token comment"># app-network：容器间内部通信网络</span>
+  <span class="token comment"># 三个服务都在这个网络里，可以用服务名互相访问</span>
+  <span class="token comment"># 例如：NestJS 连接 PostgreSQL 用 postgres:5432（不是 localhost:5432）</span>
+  <span class="token key atrule">app-network</span><span class="token punctuation">:</span>
+    <span class="token key atrule">driver</span><span class="token punctuation">:</span> bridge
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br></div></div><hr> <h2 id="八、配置-nginx-反向代理"><a href="#八、配置-nginx-反向代理" class="header-anchor">#</a> 八、配置 Nginx 反向代理</h2> <p>在项目根目录创建 <code>nginx/</code> 目录和配置文件：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 本地执行</span>
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> nginx/ssl
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>创建 <code>nginx/nginx.conf</code>：</p> <div class="language-nginx line-numbers-mode"><pre class="language-nginx"><code><span class="token comment"># nginx/nginx.conf</span>
+
+<span class="token comment"># worker_processes auto 表示根据 CPU 核心数自动设置工作进程数</span>
+<span class="token directive"><span class="token keyword">worker_processes</span> auto</span><span class="token punctuation">;</span>
+
+<span class="token directive"><span class="token keyword">events</span></span> <span class="token punctuation">{</span>
+  <span class="token comment"># 每个工作进程最大并发连接数</span>
+  <span class="token directive"><span class="token keyword">worker_connections</span> <span class="token number">1024</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token directive"><span class="token keyword">http</span></span> <span class="token punctuation">{</span>
+  <span class="token comment"># 引入 MIME 类型映射文件</span>
+  <span class="token directive"><span class="token keyword">include</span>       /etc/nginx/mime.types</span><span class="token punctuation">;</span>
+  <span class="token directive"><span class="token keyword">default_type</span>  application/octet-stream</span><span class="token punctuation">;</span>
+
+  <span class="token comment"># 日志格式定义</span>
+  <span class="token directive"><span class="token keyword">log_format</span> main <span class="token string">'<span class="token variable">$remote_addr</span> - <span class="token variable">$remote_user</span> [<span class="token variable">$time_local]</span> &quot;<span class="token variable">$request</span>&quot; '</span>
+                  <span class="token string">'<span class="token variable">$status</span> <span class="token variable">$body_bytes_sent</span> &quot;<span class="token variable">$http_referer</span>&quot; '</span>
+                  <span class="token string">'&quot;<span class="token variable">$http_user_agent</span>&quot;'</span></span><span class="token punctuation">;</span>
+
+  <span class="token comment"># 访问日志路径</span>
+  <span class="token directive"><span class="token keyword">access_log</span> /var/log/nginx/access.log main</span><span class="token punctuation">;</span>
+
+  <span class="token comment"># 错误日志路径</span>
+  <span class="token directive"><span class="token keyword">error_log</span> /var/log/nginx/error.log warn</span><span class="token punctuation">;</span>
+
+  <span class="token comment"># 开启高效文件传输模式</span>
+  <span class="token directive"><span class="token keyword">sendfile</span> <span class="token boolean">on</span></span><span class="token punctuation">;</span>
+
+  <span class="token comment"># 请求体最大大小（上传文件时用）</span>
+  <span class="token directive"><span class="token keyword">client_max_body_size</span> <span class="token number">10m</span></span><span class="token punctuation">;</span>
+
+  <span class="token comment"># 连接超时时间</span>
+  <span class="token directive"><span class="token keyword">keepalive_timeout</span> <span class="token number">65</span></span><span class="token punctuation">;</span>
+
+  <span class="token comment"># 开启 Gzip 压缩（减小传输数据量，加快响应速度）</span>
+  <span class="token directive"><span class="token keyword">gzip</span> <span class="token boolean">on</span></span><span class="token punctuation">;</span>
+  <span class="token directive"><span class="token keyword">gzip_types</span> text/plain application/json application/javascript text/css</span><span class="token punctuation">;</span>
+
+  <span class="token comment"># ── HTTP 服务器配置 ──────────────────────────────────────</span>
+  <span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+    <span class="token comment"># 监听 80 端口（HTTP）</span>
+    <span class="token directive"><span class="token keyword">listen</span> <span class="token number">80</span></span><span class="token punctuation">;</span>
+
+    <span class="token comment"># 服务器域名（替换成你自己的域名，没有域名先填 _ 匹配所有）</span>
+    <span class="token comment"># server_name api.yourdomain.com;</span>
+    <span class="token directive"><span class="token keyword">server_name</span> _</span><span class="token punctuation">;</span>
+
+    <span class="token comment"># ── API 接口转发 ──────────────────────────────────────</span>
+    <span class="token directive"><span class="token keyword">location</span> /</span> <span class="token punctuation">{</span>
+      <span class="token comment"># 把所有请求转发给 NestJS 服务</span>
+      <span class="token comment"># nestjs 是 docker-compose.yml 里定义的服务名，Docker 内网可以直接用</span>
+      <span class="token comment"># 3000 是 NestJS 容器内部端口</span>
+      <span class="token directive"><span class="token keyword">proxy_pass</span> http://nestjs:3000</span><span class="token punctuation">;</span>
+
+      <span class="token comment"># 传递真实客户端 IP 给 NestJS（方便日志记录和限流）</span>
+      <span class="token directive"><span class="token keyword">proxy_set_header</span> X-Real-IP <span class="token variable">$remote_addr</span></span><span class="token punctuation">;</span>
+      <span class="token directive"><span class="token keyword">proxy_set_header</span> X-Forwarded-For <span class="token variable">$proxy_add_x_forwarded_for</span></span><span class="token punctuation">;</span>
+
+      <span class="token comment"># 传递原始 Host 头（某些框架需要）</span>
+      <span class="token directive"><span class="token keyword">proxy_set_header</span> Host <span class="token variable">$host</span></span><span class="token punctuation">;</span>
+
+      <span class="token comment"># 传递协议信息（HTTP 还是 HTTPS）</span>
+      <span class="token directive"><span class="token keyword">proxy_set_header</span> X-Forwarded-Proto <span class="token variable">$scheme</span></span><span class="token punctuation">;</span>
+
+      <span class="token comment"># 代理超时时间（NestJS 处理慢请求时不要过早断开）</span>
+      <span class="token directive"><span class="token keyword">proxy_connect_timeout</span> <span class="token number">60s</span></span><span class="token punctuation">;</span>
+      <span class="token directive"><span class="token keyword">proxy_send_timeout</span> <span class="token number">60s</span></span><span class="token punctuation">;</span>
+      <span class="token directive"><span class="token keyword">proxy_read_timeout</span> <span class="token number">60s</span></span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment"># ── 健康检查接口 ─────────────────────────────────────</span>
+    <span class="token directive"><span class="token keyword">location</span> /health</span> <span class="token punctuation">{</span>
+      <span class="token comment"># 返回 200 OK，用于负载均衡器检查服务是否正常</span>
+      <span class="token directive"><span class="token keyword">return</span> <span class="token number">200</span> <span class="token string">'OK'</span></span><span class="token punctuation">;</span>
+      <span class="token directive"><span class="token keyword">add_header</span> Content-Type text/plain</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br></div></div><hr> <h2 id="九、配置生产环境变量"><a href="#九、配置生产环境变量" class="header-anchor">#</a> 九、配置生产环境变量</h2> <p>在项目根目录创建 <code>.env.production</code> 文件（<strong>只在服务器上创建，不要提交到 Git！</strong>）</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code># .env.production
+# 生产环境配置文件
+# 注意：这个文件绝对不能提交到 Git，必须在 .gitignore 里排除
+
+# ── PostgreSQL 数据库配置 ──────────────────────────────────
+# 数据库用户名（自定义，不要用 root 或 postgres 等默认名）
+POSTGRES_USER=nestjs_user
+
+# 数据库密码（必须是强密码：大小写字母 + 数字 + 特殊字符，至少 <span class="token number">16</span> 位）
+POSTGRES_PASSWORD=Nestjs@<span class="token number">2025</span>#SecurePass
+
+# 数据库名称
+POSTGRES_DB=nest_demo
+
+# ── Prisma 数据库连接字符串 ────────────────────────────────
+# 注意：主机名是 postgres（docker-compose 里的服务名），不是 localhost
+# 在 Docker 容器网络里，服务之间用服务名通信
+DATABASE_URL=<span class="token string">&quot;postgresql://nestjs_user:Nestjs@2025#SecurePass@postgres:5432/nest_demo?schema=public&quot;</span>
+
+# ── NestJS 应用配置 ────────────────────────────────────────
+# 运行环境
+NODE_ENV=production
+
+# 服务监听端口（容器内部端口）
+PORT=<span class="token number">3000</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><p><strong>重要</strong>：<code>.env.production</code> 只在服务器上手动创建，本地不要创建这个文件，代码仓库里也绝对不能有这个文件。</p> <hr> <h2 id="十、上传代码到服务器"><a href="#十、上传代码到服务器" class="header-anchor">#</a> 十、上传代码到服务器</h2> <h3 id="方式一-从-git-仓库拉取-推荐"><a href="#方式一-从-git-仓库拉取-推荐" class="header-anchor">#</a> 方式一：从 Git 仓库拉取（推荐）</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 在服务器上执行</span>
+<span class="token comment"># 进入部署目录</span>
+<span class="token builtin class-name">cd</span> /var/www
+
+<span class="token comment"># 从 Git 克隆项目（替换为你的仓库地址）</span>
+<span class="token comment"># GitHub：</span>
+<span class="token function">git</span> clone https://github.com/你的用户名/nestjs-prisma7-demo.git
+
+<span class="token comment"># Gitee：</span>
+<span class="token function">git</span> clone https://gitee.com/你的用户名/nestjs-prisma7-demo.git
+
+<span class="token comment"># 进入项目目录</span>
+<span class="token builtin class-name">cd</span> nestjs-prisma7-demo
+
+<span class="token comment"># 查看文件是否完整</span>
+<span class="token function">ls</span> <span class="token parameter variable">-la</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><hr> <h3 id="方式二-用-scp-直接上传-没有-git-时"><a href="#方式二-用-scp-直接上传-没有-git-时" class="header-anchor">#</a> 方式二：用 scp 直接上传（没有 Git 时）</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 在本地执行，把整个项目目录上传到服务器</span>
+<span class="token comment"># 排除 node_modules 和 dist（服务器会重新生成）</span>
+<span class="token function">scp</span> <span class="token parameter variable">-r</span> <span class="token parameter variable">--exclude</span><span class="token operator">=</span>node_modules <span class="token parameter variable">--exclude</span><span class="token operator">=</span>dist <span class="token parameter variable">--exclude</span><span class="token operator">=</span>.env <span class="token punctuation">\</span>
+  ./nestjs-prisma7-demo <span class="token punctuation">\</span>
+  root@your-server-ip:/var/www/
+
+<span class="token comment"># 如果用密钥登录</span>
+<span class="token function">scp</span> <span class="token parameter variable">-i</span> your-key.pem <span class="token parameter variable">-r</span> ./nestjs-prisma7-demo <span class="token punctuation">\</span>
+  root@your-server-ip:/var/www/
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><hr> <h3 id="创建生产环境变量文件"><a href="#创建生产环境变量文件" class="header-anchor">#</a> 创建生产环境变量文件</h3> <p>代码上传后，在服务器上手动创建 <code>.env.production</code>：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 进入项目目录</span>
+<span class="token builtin class-name">cd</span> /var/www/nestjs-prisma7-demo
+
+<span class="token comment"># 创建并编辑生产环境变量文件</span>
+<span class="token comment"># vim 编辑器：按 i 进入编辑模式，粘贴内容，按 Esc，输入 :wq 保存退出</span>
+<span class="token function">vim</span> .env.production
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>把第九节的 <code>.env.production</code> 内容粘贴进去，<strong>修改密码为你自己设置的强密码</strong>，保存。</p> <hr> <h2 id="十一、启动所有服务"><a href="#十一、启动所有服务" class="header-anchor">#</a> 十一、启动所有服务</h2> <p>确保当前在项目根目录（有 <code>docker-compose.yml</code> 的目录）：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> /var/www/nestjs-prisma7-demo
+
+<span class="token comment"># 构建镜像并启动所有服务（后台运行）</span>
+<span class="token comment"># --build 强制重新构建镜像</span>
+<span class="token comment"># -d 后台运行（detached mode，不占用终端）</span>
+<span class="token function">docker</span> compose up <span class="token parameter variable">--build</span> <span class="token parameter variable">-d</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><strong>首次启动会比较慢（3~10 分钟）：</strong></p> <ul><li>拉取 <code>postgres:18-alpine</code> 和 <code>nginx:alpine</code> 镜像</li> <li>构建 NestJS 应用镜像（npm install + prisma generate + tsc 编译）</li></ul> <p><strong>查看启动进度：</strong></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 查看所有容器状态</span>
+<span class="token function">docker</span> compose <span class="token function">ps</span>
+
+<span class="token comment"># 实时查看启动日志（Ctrl+C 退出查看，不影响服务）</span>
+<span class="token function">docker</span> compose logs <span class="token parameter variable">-f</span>
+
+<span class="token comment"># 只看 NestJS 的日志</span>
+<span class="token function">docker</span> compose logs <span class="token parameter variable">-f</span> nestjs
+
+<span class="token comment"># 只看 PostgreSQL 的日志</span>
+<span class="token function">docker</span> compose logs <span class="token parameter variable">-f</span> postgres
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p><strong>正常启动后 <strong><code>**docker compose ps**</code></strong> 输出：</strong></p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>NAME               IMAGE              STATUS          PORTS
+nestjs_postgres    postgres:18-alpine Up (healthy)    5432/tcp
+nestjs_app         ...                Up              0.0.0.0:3000-&gt;3000/tcp
+nestjs_nginx       nginx:alpine       Up              0.0.0.0:80-&gt;80/tcp
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>三个容器都是 <code>Up</code> 状态说明启动成功。</p> <hr> <h2 id="十二、执行数据库迁移"><a href="#十二、执行数据库迁移" class="header-anchor">#</a> 十二、执行数据库迁移</h2> <p>NestJS 启动后，还需要在数据库里建表，执行 Prisma 迁移：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 在正在运行的 nestjs 容器里执行迁移命令</span>
+<span class="token comment"># docker compose exec 服务名 命令</span>
+<span class="token function">docker</span> compose <span class="token builtin class-name">exec</span> nestjs npx prisma migrate deploy
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><code>**migrate deploy**</code>** 和 <strong><code>**migrate dev**</code></strong> 的区别：**</p> <table><thead><tr><th>命令</th> <th>用途</th> <th>说明</th></tr></thead> <tbody><tr><td><code>migrate dev</code></td> <td>开发环境</td> <td>会创建新的迁移文件，交互式</td></tr> <tr><td><code>migrate deploy</code></td> <td>生产环境</td> <td>只执行已有的迁移文件，不创建新的，非交互式</td></tr></tbody></table> <p><strong>执行成功输出：</strong></p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>Applying migration `20251130000000_init`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 20251130000000_init/
+       └─ migration.sql
+
+All migrations have been successfully applied.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><hr> <h2 id="十三、验证部署成功"><a href="#十三、验证部署成功" class="header-anchor">#</a> 十三、验证部署成功</h2> <h3 id="方式一-浏览器访问"><a href="#方式一-浏览器访问" class="header-anchor">#</a> 方式一：浏览器访问</h3> <p>打开浏览器，访问：</p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>http://你的服务器公网IP/user/list
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>看到 JSON 响应（哪怕是空列表）说明部署成功：</p> <div class="language-json line-numbers-mode"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;pagination&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">&quot;page&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token property">&quot;pageSize&quot;</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token property">&quot;total&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token property">&quot;totalPages&quot;</span><span class="token operator">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;list&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="方式二-curl-命令测试"><a href="#方式二-curl-命令测试" class="header-anchor">#</a> 方式二：curl 命令测试</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 在任意机器上执行（替换 IP）</span>
+<span class="token function">curl</span> http://your-server-ip/user/list
+
+<span class="token comment"># 测试创建用户</span>
+<span class="token function">curl</span> <span class="token parameter variable">-X</span> POST http://your-server-ip/user/create <span class="token punctuation">\</span>
+  <span class="token parameter variable">-H</span> <span class="token string">&quot;Content-Type: application/json&quot;</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-d</span> <span class="token string">'{&quot;name&quot;:&quot;大伟老师&quot;,&quot;email&quot;:&quot;dawei@example.com&quot;,&quot;password&quot;:&quot;123456&quot;,&quot;role&quot;:&quot;admin&quot;}'</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="方式三-apifox-测试"><a href="#方式三-apifox-测试" class="header-anchor">#</a> 方式三：Apifox 测试</h3> <p>把 Apifox 里所有接口的 Base URL 从 <code>http://localhost:3000</code> 改成 <code>http://your-server-ip</code>，重新测试所有接口。</p> <hr> <h2 id="十四、日常运维命令"><a href="#十四、日常运维命令" class="header-anchor">#</a> 十四、日常运维命令</h2> <h3 id="查看容器状态"><a href="#查看容器状态" class="header-anchor">#</a> 查看容器状态</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 查看所有容器运行状态</span>
+<span class="token function">docker</span> compose <span class="token function">ps</span>
+
+<span class="token comment"># 查看容器资源占用（CPU、内存）</span>
+<span class="token function">docker</span> stats
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="查看日志"><a href="#查看日志" class="header-anchor">#</a> 查看日志</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 查看全部服务日志</span>
+<span class="token function">docker</span> compose logs
+
+<span class="token comment"># 实时追踪 NestJS 日志</span>
+<span class="token function">docker</span> compose logs <span class="token parameter variable">-f</span> nestjs
+
+<span class="token comment"># 查看最近 100 行日志</span>
+<span class="token function">docker</span> compose logs <span class="token parameter variable">--tail</span><span class="token operator">=</span><span class="token number">100</span> nestjs
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h3 id="更新部署-代码有更新时"><a href="#更新部署-代码有更新时" class="header-anchor">#</a> 更新部署（代码有更新时）</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> /var/www/nestjs-prisma7-demo
+
+<span class="token comment"># 拉取最新代码</span>
+<span class="token function">git</span> pull origin main
+
+<span class="token comment"># 重新构建并重启（只重启有变化的服务）</span>
+<span class="token function">docker</span> compose up <span class="token parameter variable">--build</span> <span class="token parameter variable">-d</span>
+
+<span class="token comment"># 如果有新的数据库迁移，执行迁移</span>
+<span class="token function">docker</span> compose <span class="token builtin class-name">exec</span> nestjs npx prisma migrate deploy
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="重启服务"><a href="#重启服务" class="header-anchor">#</a> 重启服务</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 重启所有服务</span>
+<span class="token function">docker</span> compose restart
+
+<span class="token comment"># 只重启 NestJS</span>
+<span class="token function">docker</span> compose restart nestjs
+
+<span class="token comment"># 停止所有服务</span>
+<span class="token function">docker</span> compose down
+
+<span class="token comment"># 停止并删除数据卷（⚠️ 数据库数据会丢失，谨慎使用）</span>
+<span class="token function">docker</span> compose down <span class="token parameter variable">-v</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h3 id="进入容器调试"><a href="#进入容器调试" class="header-anchor">#</a> 进入容器调试</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 进入 NestJS 容器的 shell</span>
+<span class="token function">docker</span> compose <span class="token builtin class-name">exec</span> nestjs <span class="token function">sh</span>
+
+<span class="token comment"># 进入 PostgreSQL 容器的数据库命令行</span>
+<span class="token function">docker</span> compose <span class="token builtin class-name">exec</span> postgres psql <span class="token parameter variable">-U</span> nestjs_user <span class="token parameter variable">-d</span> nest_demo
+
+<span class="token comment"># 进入后可以执行 SQL</span>
+<span class="token punctuation">\</span>dt              <span class="token comment"># 查看所有表</span>
+SELECT * FROM <span class="token function">users</span><span class="token punctuation">;</span>
+<span class="token punctuation">\</span>q               <span class="token comment"># 退出</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="备份数据库"><a href="#备份数据库" class="header-anchor">#</a> 备份数据库</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 把 PostgreSQL 数据备份到文件</span>
+<span class="token function">docker</span> compose <span class="token builtin class-name">exec</span> postgres pg_dump <span class="token punctuation">\</span>
+  <span class="token parameter variable">-U</span> nestjs_user nest_demo <span class="token operator">&gt;</span> backup_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +%Y%m%d<span class="token variable">)</span></span>.sql
+
+<span class="token comment"># 恢复备份</span>
+<span class="token function">cat</span> backup_20251130.sql <span class="token operator">|</span> <span class="token function">docker</span> compose <span class="token builtin class-name">exec</span> <span class="token parameter variable">-T</span> postgres <span class="token punctuation">\</span>
+  psql <span class="token parameter variable">-U</span> nestjs_user <span class="token parameter variable">-d</span> nest_demo
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="清理无用镜像-释放磁盘空间"><a href="#清理无用镜像-释放磁盘空间" class="header-anchor">#</a> 清理无用镜像（释放磁盘空间）</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 删除所有未使用的镜像、容器、网络（谨慎使用）</span>
+<span class="token function">docker</span> system prune <span class="token parameter variable">-f</span>
+
+<span class="token comment"># 查看 Docker 占用的磁盘空间</span>
+<span class="token function">docker</span> system <span class="token function">df</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><hr> <h2 id="十五、常见问题处理"><a href="#十五、常见问题处理" class="header-anchor">#</a> 十五、常见问题处理</h2> <h3 id="问题-1-容器启动后立刻退出"><a href="#问题-1-容器启动后立刻退出" class="header-anchor">#</a> 问题 1：容器启动后立刻退出</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 查看容器退出日志</span>
+<span class="token function">docker</span> compose logs nestjs
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>常见原因：</p> <ul><li><code>.env.production</code> 文件不存在或路径不对</li> <li><code>DATABASE_URL</code> 里的主机名写的是 <code>localhost</code>，应该是 <code>postgres</code></li> <li><code>prisma.config.ts</code> 里的 <code>datasource.url</code> 没有读取到环境变量</li></ul> <hr> <h3 id="问题-2-nestjs-启动后无法连接数据库"><a href="#问题-2-nestjs-启动后无法连接数据库" class="header-anchor">#</a> 问题 2：NestJS 启动后无法连接数据库</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>Error: P1001: Can't reach database server at postgres:5432
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>原因：NestJS 在 PostgreSQL 还没完全就绪时就尝试连接了。</p> <p>解决：检查 <code>docker-compose.yml</code> 里 nestjs 的 <code>depends_on</code> 是否包含健康检查：</p> <div class="language-yaml line-numbers-mode"><pre class="language-yaml"><code><span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+  <span class="token key atrule">postgres</span><span class="token punctuation">:</span>
+    <span class="token key atrule">condition</span><span class="token punctuation">:</span> service_healthy   <span class="token comment"># ← 确认有这行</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><hr> <h3 id="问题-3-80-端口访问不通"><a href="#问题-3-80-端口访问不通" class="header-anchor">#</a> 问题 3：80 端口访问不通</h3> <p>可能原因：</p> <ol><li>云服务器安全组没有开放 80 端口 → 去云控制台添加规则</li> <li>服务器防火墙没有开放 80 端口 → 执行 <code>ufw allow 80</code></li> <li>Nginx 容器没有启动 → <code>docker compose ps</code> 查看状态</li></ol> <hr> <h3 id="问题-4-镜像构建失败-npm-install-报错"><a href="#问题-4-镜像构建失败-npm-install-报错" class="header-anchor">#</a> 问题 4：镜像构建失败（npm install 报错）</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 查看详细构建日志</span>
+<span class="token function">docker</span> compose build --no-cache nestjs <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-100</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>常见原因：</p> <ul><li>网络问题，npm 下载超时 → 在 Dockerfile 里加 npm 镜像源：</li></ul> <div class="language-dockerfile line-numbers-mode"><pre class="language-dockerfile"><code><span class="token instruction"><span class="token keyword">RUN</span> npm install --registry=https://registry.npmmirror.com</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><hr> <h3 id="问题-5-数据库迁移失败"><a href="#问题-5-数据库迁移失败" class="header-anchor">#</a> 问题 5：数据库迁移失败</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>Error: P3006: Migration failed to apply cleanly to the shadow database.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>原因：生产数据库里已有部分表结构，和迁移文件冲突。</p> <p>解决（谨慎操作）：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 进入容器，手动标记迁移为已执行（不实际执行 SQL）</span>
+<span class="token function">docker</span> compose <span class="token builtin class-name">exec</span> nestjs npx prisma migrate resolve <span class="token parameter variable">--applied</span> 20251130000000_init
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><hr> <h3 id="问题-6-服务器磁盘空间不足"><a href="#问题-6-服务器磁盘空间不足" class="header-anchor">#</a> 问题 6：服务器磁盘空间不足</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 查看磁盘使用情况</span>
+<span class="token function">df</span> <span class="token parameter variable">-h</span>
+
+<span class="token comment"># 查看 Docker 占用</span>
+<span class="token function">docker</span> system <span class="token function">df</span>
+
+<span class="token comment"># 清理无用镜像</span>
+<span class="token function">docker</span> image prune <span class="token parameter variable">-f</span>
+
+<span class="token comment"># 清理无用容器</span>
+<span class="token function">docker</span> container prune <span class="token parameter variable">-f</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><hr> <h2 id="附-完整文件清单"><a href="#附-完整文件清单" class="header-anchor">#</a> 附：完整文件清单</h2> <p>部署所需的所有文件（在项目根目录）：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>nestjs-prisma7-demo/
+├── Dockerfile                  ← 新增：Docker 镜像构建文件
+├── docker-compose.yml          ← 新增：多服务编排文件
+├── nginx/
+│   ├── nginx.conf              ← 新增：Nginx 配置
+│   └── ssl/                   ← 新增：SSL 证书目录（暂时为空）
+├── .env.production             ← 服务器上手动创建，不提交 Git
+├── .gitignore                  ← 确认排除 .env.production
+├── prisma/
+│   ├── schema.prisma
+│   └── migrations/            ← 必须提交 Git
+├── prisma.config.ts
+├── src/
+│   ├── generated/             ← .gitignore 排除，服务器重新生成
+│   └── <span class="token punctuation">..</span>.
+├── package.json
+├── tsconfig.json
+└── nest-cli.json
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><hr> <h2 id="附-部署流程一览-完整步骤总结"><a href="#附-部署流程一览-完整步骤总结" class="header-anchor">#</a> 附：部署流程一览（完整步骤总结）</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>第一次部署：
+
+<span class="token number">1</span>. 买服务器（阿里云/腾讯云 <span class="token number">2</span>核2GB Ubuntu <span class="token number">22.04</span>）
+        ↓
+<span class="token number">2</span>. SSH 连接服务器，系统初始化，安装 Docker
+        ↓
+<span class="token number">3</span>. 本地准备：写好 Dockerfile + docker-compose.yml + nginx.conf
+        ↓
+<span class="token number">4</span>. 本地代码推送到 Git 仓库
+        ↓
+<span class="token number">5</span>. 服务器：git clone 拉取代码
+        ↓
+<span class="token number">6</span>. 服务器：手动创建 .env.production（填写真实密码）
+        ↓
+<span class="token number">7</span>. 服务器：docker compose up <span class="token parameter variable">--build</span> -d（构建镜像并启动）
+        ↓
+<span class="token number">8</span>. 服务器：docker compose <span class="token builtin class-name">exec</span> nestjs npx prisma migrate deploy（建表）
+        ↓
+<span class="token number">9</span>. 浏览器访问 http://服务器IP/user/list 验证
+
+────────────────────────────────────────────
+
+后续代码更新：
+
+<span class="token number">1</span>. 本地改代码，git push
+        ↓
+<span class="token number">2</span>. 服务器：git pull
+        ↓
+<span class="token number">3</span>. 服务器：docker compose up <span class="token parameter variable">--build</span> <span class="token parameter variable">-d</span>
+        ↓
+<span class="token number">4</span>. 如有数据库变更：docker compose <span class="token builtin class-name">exec</span> nestjs npx prisma migrate deploy
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div></div></section> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev"><a href="/blog/article/nest/index2.html" class="prev">
+          手搓Nest-blog后端服务(二)
+        </a></span> <span class="next"><a href="/blog/article/nest/nest-prisma-pg.html">
+          NestJS + Prisma + PostgreSQ
+        </a></span></p></div> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#一、部署整体架构" class="sidebar-link reco-side-一、部署整体架构" data-v-b57cc07c>一、部署整体架构</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#二、购买服务器" class="sidebar-link reco-side-二、购买服务器" data-v-b57cc07c>二、购买服务器</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#推荐配置-个人玩法" class="sidebar-link reco-side-推荐配置-个人玩法" data-v-b57cc07c>推荐配置(个人玩法)</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#阿里云购买步骤" class="sidebar-link reco-side-阿里云购买步骤" data-v-b57cc07c>阿里云购买步骤</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#腾讯云购买步骤" class="sidebar-link reco-side-腾讯云购买步骤" data-v-b57cc07c>腾讯云购买步骤</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#三、服务器初始化配置" class="sidebar-link reco-side-三、服务器初始化配置" data-v-b57cc07c>三、服务器初始化配置</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#连接服务器" class="sidebar-link reco-side-连接服务器" data-v-b57cc07c>连接服务器</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#系统初始化" class="sidebar-link reco-side-系统初始化" data-v-b57cc07c>系统初始化</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#配置防火墙" class="sidebar-link reco-side-配置防火墙" data-v-b57cc07c>配置防火墙</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#创建普通用户-可选-更安全" class="sidebar-link reco-side-创建普通用户-可选-更安全" data-v-b57cc07c>创建普通用户（可选，更安全）</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#四、安装-docker-和-docker-compose" class="sidebar-link reco-side-四、安装-docker-和-docker-compose" data-v-b57cc07c>四、安装 Docker 和 Docker Compose</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#五、准备项目代码" class="sidebar-link reco-side-五、准备项目代码" data-v-b57cc07c>五、准备项目代码</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#检查-gitignore" class="sidebar-link reco-side-检查-gitignore" data-v-b57cc07c>检查 .gitignore</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#初始化-git-并推送到代码仓库" class="sidebar-link reco-side-初始化-git-并推送到代码仓库" data-v-b57cc07c>初始化 Git 并推送到代码仓库</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#六、编写-dockerfile" class="sidebar-link reco-side-六、编写-dockerfile" data-v-b57cc07c>六、编写 Dockerfile</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#七、编写-docker-compose-yml" class="sidebar-link reco-side-七、编写-docker-compose-yml" data-v-b57cc07c>七、编写 docker-compose.yml</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#八、配置-nginx-反向代理" class="sidebar-link reco-side-八、配置-nginx-反向代理" data-v-b57cc07c>八、配置 Nginx 反向代理</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#九、配置生产环境变量" class="sidebar-link reco-side-九、配置生产环境变量" data-v-b57cc07c>九、配置生产环境变量</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#十、上传代码到服务器" class="sidebar-link reco-side-十、上传代码到服务器" data-v-b57cc07c>十、上传代码到服务器</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#方式一-从-git-仓库拉取-推荐" class="sidebar-link reco-side-方式一-从-git-仓库拉取-推荐" data-v-b57cc07c>方式一：从 Git 仓库拉取（推荐）</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#方式二-用-scp-直接上传-没有-git-时" class="sidebar-link reco-side-方式二-用-scp-直接上传-没有-git-时" data-v-b57cc07c>方式二：用 scp 直接上传（没有 Git 时）</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#创建生产环境变量文件" class="sidebar-link reco-side-创建生产环境变量文件" data-v-b57cc07c>创建生产环境变量文件</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#十一、启动所有服务" class="sidebar-link reco-side-十一、启动所有服务" data-v-b57cc07c>十一、启动所有服务</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#十二、执行数据库迁移" class="sidebar-link reco-side-十二、执行数据库迁移" data-v-b57cc07c>十二、执行数据库迁移</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#十三、验证部署成功" class="sidebar-link reco-side-十三、验证部署成功" data-v-b57cc07c>十三、验证部署成功</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#方式一-浏览器访问" class="sidebar-link reco-side-方式一-浏览器访问" data-v-b57cc07c>方式一：浏览器访问</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#方式二-curl-命令测试" class="sidebar-link reco-side-方式二-curl-命令测试" data-v-b57cc07c>方式二：curl 命令测试</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#方式三-apifox-测试" class="sidebar-link reco-side-方式三-apifox-测试" data-v-b57cc07c>方式三：Apifox 测试</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#十四、日常运维命令" class="sidebar-link reco-side-十四、日常运维命令" data-v-b57cc07c>十四、日常运维命令</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#查看容器状态" class="sidebar-link reco-side-查看容器状态" data-v-b57cc07c>查看容器状态</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#查看日志" class="sidebar-link reco-side-查看日志" data-v-b57cc07c>查看日志</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#更新部署-代码有更新时" class="sidebar-link reco-side-更新部署-代码有更新时" data-v-b57cc07c>更新部署（代码有更新时）</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#重启服务" class="sidebar-link reco-side-重启服务" data-v-b57cc07c>重启服务</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#进入容器调试" class="sidebar-link reco-side-进入容器调试" data-v-b57cc07c>进入容器调试</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#备份数据库" class="sidebar-link reco-side-备份数据库" data-v-b57cc07c>备份数据库</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#清理无用镜像-释放磁盘空间" class="sidebar-link reco-side-清理无用镜像-释放磁盘空间" data-v-b57cc07c>清理无用镜像（释放磁盘空间）</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#十五、常见问题处理" class="sidebar-link reco-side-十五、常见问题处理" data-v-b57cc07c>十五、常见问题处理</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#问题-1-容器启动后立刻退出" class="sidebar-link reco-side-问题-1-容器启动后立刻退出" data-v-b57cc07c>问题 1：容器启动后立刻退出</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#问题-2-nestjs-启动后无法连接数据库" class="sidebar-link reco-side-问题-2-nestjs-启动后无法连接数据库" data-v-b57cc07c>问题 2：NestJS 启动后无法连接数据库</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#问题-3-80-端口访问不通" class="sidebar-link reco-side-问题-3-80-端口访问不通" data-v-b57cc07c>问题 3：80 端口访问不通</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#问题-4-镜像构建失败-npm-install-报错" class="sidebar-link reco-side-问题-4-镜像构建失败-npm-install-报错" data-v-b57cc07c>问题 4：镜像构建失败（npm install 报错）</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#问题-5-数据库迁移失败" class="sidebar-link reco-side-问题-5-数据库迁移失败" data-v-b57cc07c>问题 5：数据库迁移失败</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/nest/docker.html#问题-6-服务器磁盘空间不足" class="sidebar-link reco-side-问题-6-服务器磁盘空间不足" data-v-b57cc07c>问题 6：服务器磁盘空间不足</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#附-完整文件清单" class="sidebar-link reco-side-附-完整文件清单" data-v-b57cc07c>附：完整文件清单</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/nest/docker.html#附-部署流程一览-完整步骤总结" class="sidebar-link reco-side-附-部署流程一览-完整步骤总结" data-v-b57cc07c>附：部署流程一览（完整步骤总结）</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><canvas id="vuepress-canvas-cursor"></canvas><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      春风不语，即随本心‌。
+    </div> <div class="operation" style="right:90px;bottom:40px;display:;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:;" data-v-5775ee02></i></div> <canvas id="banniang" width="140" height="252" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div><!----><div class="RibbonAnimation"></div></div></div>
+    <script src="/blog/assets/js/app.d9f1916b.js" defer></script><script src="/blog/assets/js/7.904774fa.js" defer></script><script src="/blog/assets/js/2.412c0669.js" defer></script><script src="/blog/assets/js/1.78935ad8.js" defer></script><script src="/blog/assets/js/80.12acb350.js" defer></script>
+  </body>
+</html>

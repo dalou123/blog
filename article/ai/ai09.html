@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>NestJS + LangChain 大模型应用 | 大楼のBlog</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/blog/favicon.ico">
+    <meta name="description" content="小时候梦想能仗剑走天涯，现在愿望是自驾318。">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.ee255dff.css" as="style"><link rel="preload" href="/blog/assets/js/app.d9f1916b.js" as="script"><link rel="preload" href="/blog/assets/js/7.904774fa.js" as="script"><link rel="preload" href="/blog/assets/js/2.412c0669.js" as="script"><link rel="preload" href="/blog/assets/js/1.78935ad8.js" as="script"><link rel="preload" href="/blog/assets/js/57.770c6b4d.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.276f9ad5.js"><link rel="prefetch" href="/blog/assets/js/100.8079de71.js"><link rel="prefetch" href="/blog/assets/js/101.2b29b6b6.js"><link rel="prefetch" href="/blog/assets/js/102.0996c4f1.js"><link rel="prefetch" href="/blog/assets/js/103.9d90c0c2.js"><link rel="prefetch" href="/blog/assets/js/104.0e231b3c.js"><link rel="prefetch" href="/blog/assets/js/105.ce92d7c8.js"><link rel="prefetch" href="/blog/assets/js/106.0ac74d8b.js"><link rel="prefetch" href="/blog/assets/js/107.b9e6dc79.js"><link rel="prefetch" href="/blog/assets/js/108.7edc3c95.js"><link rel="prefetch" href="/blog/assets/js/109.1a7e79e3.js"><link rel="prefetch" href="/blog/assets/js/11.46150e98.js"><link rel="prefetch" href="/blog/assets/js/110.ed39d2d1.js"><link rel="prefetch" href="/blog/assets/js/111.086cbb7e.js"><link rel="prefetch" href="/blog/assets/js/112.454d4558.js"><link rel="prefetch" href="/blog/assets/js/113.ce7f3a1a.js"><link rel="prefetch" href="/blog/assets/js/114.55818be5.js"><link rel="prefetch" href="/blog/assets/js/115.14133cc8.js"><link rel="prefetch" href="/blog/assets/js/116.27a79d65.js"><link rel="prefetch" href="/blog/assets/js/117.dabc4b17.js"><link rel="prefetch" href="/blog/assets/js/118.4eb242cc.js"><link rel="prefetch" href="/blog/assets/js/119.c4caaa7e.js"><link rel="prefetch" href="/blog/assets/js/120.7062fa97.js"><link rel="prefetch" href="/blog/assets/js/121.ea2bd082.js"><link rel="prefetch" href="/blog/assets/js/122.e0fb50ec.js"><link rel="prefetch" href="/blog/assets/js/123.e8f93dc8.js"><link rel="prefetch" href="/blog/assets/js/124.1db25f19.js"><link rel="prefetch" href="/blog/assets/js/125.ea528cf7.js"><link rel="prefetch" href="/blog/assets/js/126.08853775.js"><link rel="prefetch" href="/blog/assets/js/14.1202a963.js"><link rel="prefetch" href="/blog/assets/js/15.41a05e59.js"><link rel="prefetch" href="/blog/assets/js/16.9cea7118.js"><link rel="prefetch" href="/blog/assets/js/17.c71f2f42.js"><link rel="prefetch" href="/blog/assets/js/18.4959dd42.js"><link rel="prefetch" href="/blog/assets/js/19.d11089f9.js"><link rel="prefetch" href="/blog/assets/js/20.bd9f1c56.js"><link rel="prefetch" href="/blog/assets/js/21.4b093b38.js"><link rel="prefetch" href="/blog/assets/js/22.e24c9220.js"><link rel="prefetch" href="/blog/assets/js/23.9e373ea4.js"><link rel="prefetch" href="/blog/assets/js/24.c524cd02.js"><link rel="prefetch" href="/blog/assets/js/25.a873c6d1.js"><link rel="prefetch" href="/blog/assets/js/26.80934b62.js"><link rel="prefetch" href="/blog/assets/js/27.4ead19bf.js"><link rel="prefetch" href="/blog/assets/js/28.f42845ef.js"><link rel="prefetch" href="/blog/assets/js/29.f3a4e922.js"><link rel="prefetch" href="/blog/assets/js/3.af72d276.js"><link rel="prefetch" href="/blog/assets/js/30.66738f99.js"><link rel="prefetch" href="/blog/assets/js/31.fd5c06fc.js"><link rel="prefetch" href="/blog/assets/js/32.fabd7618.js"><link rel="prefetch" href="/blog/assets/js/33.037158bf.js"><link rel="prefetch" href="/blog/assets/js/34.8cdce2d4.js"><link rel="prefetch" href="/blog/assets/js/35.e9005675.js"><link rel="prefetch" href="/blog/assets/js/36.9ca4d216.js"><link rel="prefetch" href="/blog/assets/js/37.d641a971.js"><link rel="prefetch" href="/blog/assets/js/38.11f5bf85.js"><link rel="prefetch" href="/blog/assets/js/39.25c91267.js"><link rel="prefetch" href="/blog/assets/js/4.45be71ff.js"><link rel="prefetch" href="/blog/assets/js/40.12e0fca6.js"><link rel="prefetch" href="/blog/assets/js/41.09699d26.js"><link rel="prefetch" href="/blog/assets/js/42.f2a43a53.js"><link rel="prefetch" href="/blog/assets/js/43.cb66d995.js"><link rel="prefetch" href="/blog/assets/js/44.ff7808b1.js"><link rel="prefetch" href="/blog/assets/js/45.d4085a02.js"><link rel="prefetch" href="/blog/assets/js/46.4100bb4d.js"><link rel="prefetch" href="/blog/assets/js/47.eb3e8f8e.js"><link rel="prefetch" href="/blog/assets/js/48.82050622.js"><link rel="prefetch" href="/blog/assets/js/49.399e74e2.js"><link rel="prefetch" href="/blog/assets/js/5.ef80b954.js"><link rel="prefetch" href="/blog/assets/js/50.b2f2991b.js"><link rel="prefetch" href="/blog/assets/js/51.bcc89233.js"><link rel="prefetch" href="/blog/assets/js/52.e8deded4.js"><link rel="prefetch" href="/blog/assets/js/53.b958679f.js"><link rel="prefetch" href="/blog/assets/js/54.f256e417.js"><link rel="prefetch" href="/blog/assets/js/55.8c0ad948.js"><link rel="prefetch" href="/blog/assets/js/56.571191e0.js"><link rel="prefetch" href="/blog/assets/js/58.2fafd7d2.js"><link rel="prefetch" href="/blog/assets/js/59.fbc4c07a.js"><link rel="prefetch" href="/blog/assets/js/6.5e3616a4.js"><link rel="prefetch" href="/blog/assets/js/60.d7b6551b.js"><link rel="prefetch" href="/blog/assets/js/61.571eba71.js"><link rel="prefetch" href="/blog/assets/js/62.0edf5e26.js"><link rel="prefetch" href="/blog/assets/js/63.8291b4c1.js"><link rel="prefetch" href="/blog/assets/js/64.1b1a570a.js"><link rel="prefetch" href="/blog/assets/js/65.c8fd893d.js"><link rel="prefetch" href="/blog/assets/js/66.430f82e9.js"><link rel="prefetch" href="/blog/assets/js/67.3bb3eadc.js"><link rel="prefetch" href="/blog/assets/js/68.d4288466.js"><link rel="prefetch" href="/blog/assets/js/69.71115584.js"><link rel="prefetch" href="/blog/assets/js/70.34229f01.js"><link rel="prefetch" href="/blog/assets/js/71.9db809d9.js"><link rel="prefetch" href="/blog/assets/js/72.fbb51636.js"><link rel="prefetch" href="/blog/assets/js/73.ea58197b.js"><link rel="prefetch" href="/blog/assets/js/74.d3bf5f61.js"><link rel="prefetch" href="/blog/assets/js/75.1a34c5dd.js"><link rel="prefetch" href="/blog/assets/js/76.a0546862.js"><link rel="prefetch" href="/blog/assets/js/77.7f183461.js"><link rel="prefetch" href="/blog/assets/js/78.a79f38f4.js"><link rel="prefetch" href="/blog/assets/js/79.bac338c7.js"><link rel="prefetch" href="/blog/assets/js/8.1cb509a3.js"><link rel="prefetch" href="/blog/assets/js/80.12acb350.js"><link rel="prefetch" href="/blog/assets/js/81.2d14fd0e.js"><link rel="prefetch" href="/blog/assets/js/82.5e2527a4.js"><link rel="prefetch" href="/blog/assets/js/83.4e29a236.js"><link rel="prefetch" href="/blog/assets/js/84.29e49c84.js"><link rel="prefetch" href="/blog/assets/js/85.bc4bc26a.js"><link rel="prefetch" href="/blog/assets/js/86.185dfdf2.js"><link rel="prefetch" href="/blog/assets/js/87.d7ee6fa9.js"><link rel="prefetch" href="/blog/assets/js/88.48c6a155.js"><link rel="prefetch" href="/blog/assets/js/89.3dd34aa7.js"><link rel="prefetch" href="/blog/assets/js/9.58eab764.js"><link rel="prefetch" href="/blog/assets/js/90.17851d51.js"><link rel="prefetch" href="/blog/assets/js/91.150cb11c.js"><link rel="prefetch" href="/blog/assets/js/92.b0ff8cca.js"><link rel="prefetch" href="/blog/assets/js/93.5478171d.js"><link rel="prefetch" href="/blog/assets/js/94.30bb28a0.js"><link rel="prefetch" href="/blog/assets/js/95.7b0a630e.js"><link rel="prefetch" href="/blog/assets/js/96.e8e3d0bd.js"><link rel="prefetch" href="/blog/assets/js/97.3ec69f88.js"><link rel="prefetch" href="/blog/assets/js/98.0ec5a8c8.js"><link rel="prefetch" href="/blog/assets/js/99.b4bf7af8.js"><link rel="prefetch" href="/blog/assets/js/vendors~docsearch.8567a2bd.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.ee255dff.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>大楼のBlog</h3> <p class="description" data-v-59e6cb88>小时候梦想能仗剑走天涯，现在愿望是自驾318。</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>大楼</span>
+          
+        <span data-v-59e6cb88>2019 - </span>
+        2026
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><img src="/blog/favicon.ico" alt="大楼のBlog" class="logo"> <span class="site-name">大楼のBlog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link"><i class="iconfont reco-home"></i>
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/categories/AI-浪潮/" class="nav-link"><i class="undefined"></i>
+  AI-浪潮
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/前端沉淀/" class="nav-link"><i class="undefined"></i>
+  前端沉淀
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/后端扩展/" class="nav-link"><i class="undefined"></i>
+  后端扩展
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/React框架/" class="nav-link"><i class="undefined"></i>
+  React框架
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/Vue框架/" class="nav-link"><i class="undefined"></i>
+  Vue框架
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/畅想生活/" class="nav-link"><i class="undefined"></i>
+  畅想生活
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/blog/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-menu"></i>
+      神器
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>在线生成</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://cli.im/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  二维码生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.logosc.cn/logo/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Logo生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://cron.qqe2.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Cron生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.pdfpai.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  在线PDF工具
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>在线转换</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://tool.oschina.net/codeformat/html" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  在线代码格式化
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.beijing-time.org/shijianchuo/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  时间戳转换
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/jsoneditoronline/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Json编辑器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/convert/image_to_svg/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  png转svg
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>在线服务</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.logosc.cn/so/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  图片搜索
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.youcompress.com/zh-cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  图片压缩
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>AI-资源</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://claudecode.tangshuang.net/tutorial" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  claude-code
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bigmodel.cn/glm-coding?ic=5AH7ATEZSC&amp;closedialog=true" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  智普模型
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://docs.n1n.ai/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  n1n接口平台
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/dalou123/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://193.112.101.157:8080/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-theme"></i>
+  Dalou-ui
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://193.112.101.157/app/index" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-blog"></i>
+  Dalou-blog
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/blog/images/sgns02.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    大楼
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>88</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>31</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link"><i class="iconfont reco-home"></i>
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/categories/AI-浪潮/" class="nav-link"><i class="undefined"></i>
+  AI-浪潮
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/前端沉淀/" class="nav-link"><i class="undefined"></i>
+  前端沉淀
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/后端扩展/" class="nav-link"><i class="undefined"></i>
+  后端扩展
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/React框架/" class="nav-link"><i class="undefined"></i>
+  React框架
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/Vue框架/" class="nav-link"><i class="undefined"></i>
+  Vue框架
+</a></li><li class="dropdown-item"><!----> <a href="/blog/categories/畅想生活/" class="nav-link"><i class="undefined"></i>
+  畅想生活
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><a href="/blog/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-menu"></i>
+      神器
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>在线生成</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://cli.im/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  二维码生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.logosc.cn/logo/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Logo生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://cron.qqe2.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Cron生成器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.pdfpai.com/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  在线PDF工具
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>在线转换</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://tool.oschina.net/codeformat/html" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  在线代码格式化
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.beijing-time.org/shijianchuo/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  时间戳转换
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/jsoneditoronline/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Json编辑器
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/convert/image_to_svg/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  png转svg
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>在线服务</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.logosc.cn/so/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  图片搜索
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.youcompress.com/zh-cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  图片压缩
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>AI-资源</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://claudecode.tangshuang.net/tutorial" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  claude-code
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bigmodel.cn/glm-coding?ic=5AH7ATEZSC&amp;closedialog=true" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  智普模型
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://docs.n1n.ai/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  n1n接口平台
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/dalou123/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://193.112.101.157:8080/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-theme"></i>
+  Dalou-ui
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://193.112.101.157/app/index" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-blog"></i>
+  Dalou-blog
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Vue框架</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/article/vue/vue01.html" class="sidebar-link">发布自己的npm包</a></li><li><a href="/blog/article/vue/vue02.html" class="sidebar-link">Vue3+ts部署私有UI组件库</a></li><li><a href="/blog/article/vue/vue03.html" class="sidebar-link">vue3注册全局方法</a></li><li><a href="/blog/article/vue/vue04.html" class="sidebar-link">vue-router两种模式</a></li><li><a href="/blog/article/vue/vue05.html" class="sidebar-link">vue3-API汇总</a></li><li><a href="/blog/article/vue/vue06.html" class="sidebar-link">Vue3的不同版本总结</a></li><li><a href="/blog/article/vue/vue07.html" class="sidebar-link">Pinia和Vuex</a></li><li><a href="/blog/article/vue/vue08.html" class="sidebar-link">Vue-diff算法</a></li><li><a href="/blog/article/vue/vue09.html" class="sidebar-link">Vue-keep alive</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>React框架</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>前端沉淀</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>后端扩展</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>AI-浪潮</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>畅想生活</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>NestJS + LangChain 大模型应用</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>大楼</span>
+          
+        <span data-v-59e6cb88>2019 - </span>
+        2026
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">NestJS + LangChain 大模型应用</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>dalou</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2026/8/5</span></i> <!----> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>nest</span><span class="tag-item" data-v-8a445198>LangChain</span></i></div></div> <div class="theme-reco-content content__default"><p>模型：qwen3.5:0.8b（本地 Ollama 部署） 框架：NestJS + @langchain/ollama 包含：Models · Prompts · Chains · Agents · Memory · RAG · Function Calling 本文档不使用数据库，所有状态保存在内存</p> <hr> <h2 id="目录"><a href="#目录" class="header-anchor">#</a> 目录</h2> <ol><li>整体架构和项目初始化</li> <li>Models — 统一对接 LLM 接口</li> <li>Prompts — 可复用提示词工程</li> <li>Chains — 链式调用固定任务流</li> <li>Agents — 智能代理自主决策</li> <li>Memory — 多轮上下文记忆</li> <li>RAG — 检索增强生成</li> <li>Function Calling — 工具调用</li> <li>Apifox 完整测试</li></ol> <hr> <h2 id="一、整体架构和项目初始化"><a href="#一、整体架构和项目初始化" class="header-anchor">#</a> 一、整体架构和项目初始化</h2> <h3 id="_1-1-每个模块解决什么问题"><a href="#_1-1-每个模块解决什么问题" class="header-anchor">#</a> 1.1 每个模块解决什么问题</h3> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>Models         → 统一封装 LLM，一行代码切换任意模型
+Prompts        → 可复用的提示词模板，变量动态注入
+Chains         → 固定流程的任务链，适合结构化场景
+Agents         → 模型自主决定调用哪个工具，适合动态场景
+Memory         → 多轮对话保留上下文，不每次从零开始
+RAG            → 检索外部知识库后再回答，解决幻觉问题
+Function Calling → 模型驱动调用真实函数，实现工具能力
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="_1-2-数据流总览"><a href="#_1-2-数据流总览" class="header-anchor">#</a> 1.2 数据流总览</h3> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>用户请求（HTTP / SSE）
+        ↓
+NestJS Controller（接收参数）
+        ↓
+NestJS Service（业务逻辑）
+        ↓
+LangChain（组装 Prompt / Chain / Agent）
+        ↓
+@langchain/ollama（调用本地 Ollama API）
+        ↓
+qwen3.5:0.8b（生成回答）
+        ↓
+Controller 返回响应（JSON / SSE 流）
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="_1-3-创建项目"><a href="#_1-3-创建项目" class="header-anchor">#</a> 1.3 创建项目</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>nest new nestjs-llm-demo
+<span class="token builtin class-name">cd</span> nestjs-llm-demo
+
+<span class="token comment"># 安装 LangChain 相关依赖</span>
+<span class="token function">npm</span> <span class="token function">install</span> @langchain/ollama @langchain/core @langchain/community
+
+<span class="token comment"># 安装 LangChain 文本分块器（RAG 用）</span>
+<span class="token function">npm</span> <span class="token function">install</span> @langchain/textsplitters
+
+<span class="token comment"># 安装 Chroma 向量数据库（RAG 用，本文档用内存替代，可选）</span>
+<span class="token comment"># npm install chromadb</span>
+
+<span class="token comment"># 安装 zod（Function Calling 参数校验用）</span>
+<span class="token function">npm</span> <span class="token function">install</span> zod
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h3 id="_1-4-全局配置文件"><a href="#_1-4-全局配置文件" class="header-anchor">#</a> 1.4 全局配置文件</h3> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">// src/config.ts</span>
+<span class="token comment">// 所有可变参数集中在这里，换模型只改这一个文件</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">ollama</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Ollama 服务地址</span>
+    <span class="token literal-property property">baseUrl</span><span class="token operator">:</span> <span class="token string">'http://localhost:11434'</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 对话模型：qwen3.5:0.8b</span>
+    <span class="token comment">// 确认已拉取：ollama pull qwen3.5:0.8b</span>
+    <span class="token literal-property property">chatModel</span><span class="token operator">:</span> <span class="token string">'qwen3.5:0.8b'</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 向量化模型（RAG 用）</span>
+    <span class="token comment">// 确认已拉取：ollama pull mxbai-embed-large</span>
+    <span class="token literal-property property">embedModel</span><span class="token operator">:</span> <span class="token string">'mxbai-embed-large'</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 温度：0 = 最保守，1 = 最随机</span>
+    <span class="token comment">// 知识问答用 0.1~0.3，创意写作用 0.7~1.0</span>
+    <span class="token literal-property property">temperature</span><span class="token operator">:</span> <span class="token number">0.3</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h3 id="_1-5-项目最终目录结构"><a href="#_1-5-项目最终目录结构" class="header-anchor">#</a> 1.5 项目最终目录结构</h3> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>src/
+├── config.ts                   ← 全局配置
+├── app.module.ts               ← 根模块
+├── main.ts                     ← 入口
+├── models/                     ← 第二节：Models
+│   ├── models.module.ts
+│   ├── models.controller.ts
+│   └── models.service.ts
+├── prompts/                    ← 第三节：Prompts
+│   ├── prompts.module.ts
+│   ├── prompts.controller.ts
+│   └── prompts.service.ts
+├── chains/                     ← 第四节：Chains
+│   ├── chains.module.ts
+│   ├── chains.controller.ts
+│   └── chains.service.ts
+├── agents/                     ← 第五节：Agents
+│   ├── agents.module.ts
+│   ├── agents.controller.ts
+│   └── agents.service.ts
+├── memory/                     ← 第六节：Memory
+│   ├── memory.module.ts
+│   ├── memory.controller.ts
+│   └── memory.service.ts
+├── rag/                        ← 第七节：RAG
+│   ├── rag.module.ts
+│   ├── rag.controller.ts
+│   └── rag.service.ts
+└── function-calling/           ← 第八节：Function Calling
+    ├── function-calling.module.ts
+    ├── function-calling.controller.ts
+    └── function-calling.service.ts
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><p>生成所有模块：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>nest g module models
+nest g controller models
+nest g <span class="token function">service</span> models
+
+nest g module prompts
+nest g controller prompts
+nest g <span class="token function">service</span> prompts
+
+nest g module chains
+nest g controller chains
+nest g <span class="token function">service</span> chains
+
+nest g module agents
+nest g controller agents
+nest g <span class="token function">service</span> agents
+
+nest g module memory
+nest g controller memory
+nest g <span class="token function">service</span> memory
+
+nest g module rag
+nest g controller rag
+nest g <span class="token function">service</span> rag
+
+nest g module function-calling
+nest g controller function-calling
+nest g <span class="token function">service</span> function-calling
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div><hr> <h2 id="二、models-统一对接-llm-接口"><a href="#二、models-统一对接-llm-接口" class="header-anchor">#</a> 二、Models — 统一对接 LLM 接口</h2> <h3 id="_2-1-概念说明"><a href="#_2-1-概念说明" class="header-anchor">#</a> 2.1 概念说明</h3> <p>Models 是 LangChain 最基础的部分，负责把&quot;调用大模型&quot;这件事抽象成统一接口。</p> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>不用 LangChain：
+  调用 Ollama  → fetch('http://localhost:11434/api/chat', { ... })
+  调用 OpenAI  → openai.chat.completions.create({ ... })
+  调用 DeepSeek → fetch('https://api.deepseek.com/...', { ... })
+  三种 API 格式完全不一样，换模型要改大量代码
+
+用 LangChain Models：
+  const llm = new ChatOllama({ model: 'qwen3.5:0.8b' })
+  const res = await llm.invoke([...messages])
+  换模型只需改 new ChatOllama → new ChatOpenAI，代码不变
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="_2-2-核心类说明"><a href="#_2-2-核心类说明" class="header-anchor">#</a> 2.2 核心类说明</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>ChatOllama        → 对话模型，支持多轮消息（推荐）
+OllamaEmbeddings  → 向量化模型，把文本转成向量数组（RAG 用）
+
+消息类型：
+  HumanMessage   → 用户消息（role: user）
+  AIMessage      → 模型回复（role: assistant）
+  SystemMessage  → 系统指令（role: system）
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="_2-3-models-service-ts"><a href="#_2-3-models-service-ts" class="header-anchor">#</a> 2.3 models.service.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/models/models.service.ts
+
+import { Injectable } from '@nestjs/common'
+import { Response } from 'express'
+import { ChatOllama } from '@langchain/ollama'
+import { HumanMessage, SystemMessage } from '@langchain/core/messages'
+import { StringOutputParser } from '@langchain/core/output_parsers'
+import { config } from '../config'
+
+@Injectable()
+export class ModelsService {
+  // 创建 ChatOllama 实例
+  // 所有参数从 config 读取，方便统一管理
+  private llm = new ChatOllama({
+    model: config.ollama.chatModel,        // 'qwen3.5:0.8b'
+    baseUrl: config.ollama.baseUrl,        // 'http://localhost:11434'
+    temperature: config.ollama.temperature, // 0.3
+  })
+
+  // ── 方式一：基础调用（等待完整回答后返回）──────────────
+  // 适合：简单问答、不需要流式输出的场景
+  async basicChat(message: string) {
+    // invoke 接收消息数组，返回 AIMessage 对象
+    // HumanMessage 对应 role: &quot;user&quot;
+    const response = await this.llm.invoke([
+      new HumanMessage(message),
+    ])
+
+    // response.content 是模型返回的文字内容
+    return {
+      question: message,
+      answer: response.content,
+      // usage 包含 token 消耗信息（qwen3.5:0.8b 支持）
+      usage: response.usage_metadata,
+    }
+  }
+
+  // ── 方式二：带 System Prompt 的调用 ────────────────────
+  // System Prompt 用于设定模型的角色和行为规范
+  async chatWithSystem(system: string, message: string) {
+    const response = await this.llm.invoke([
+      // SystemMessage 最先传入，设定角色
+      new SystemMessage(system),
+      // HumanMessage 是用户的实际问题
+      new HumanMessage(message),
+    ])
+
+    return {
+      system,
+      question: message,
+      answer: response.content,
+    }
+  }
+
+  // ── 方式三：SSE 流式输出 ────────────────────────────────
+  // 适合：需要逐字显示的对话场景（类似 ChatGPT 打字效果）
+  // res 是 Express 的 Response 对象，用于向客户端推送数据
+  async streamChat(message: string, res: Response) {
+    // 设置 SSE 响应头
+    res.setHeader('Content-Type', 'text/event-stream')
+    res.setHeader('Cache-Control', 'no-cache')
+    res.setHeader('Connection', 'keep-alive')
+    res.setHeader('Access-Control-Allow-Origin', '*')
+
+    // stream 方法返回 AsyncGenerator，每次产出一个 chunk
+    const stream = await this.llm.stream([
+      new HumanMessage(message),
+    ])
+
+    // 逐个 chunk 推送给客户端
+    for await (const chunk of stream) {
+      // chunk.content 是这个片段的文字内容
+      if (chunk.content) {
+        // SSE 格式：data: 内容\n\n
+        res.write(`data: ${JSON.stringify({ text: chunk.content })}\n\n`)
+      }
+    }
+
+    // 发送结束标记
+    res.write('data: [DONE]\n\n')
+    res.end()
+  }
+
+  // ── 方式四：使用 pipe 链式调用 ─────────────────────────
+  // StringOutputParser 把 AIMessage 对象转成纯字符串
+  async chatWithParser(message: string) {
+    // pipe 是 LangChain 的管道操作符
+    // llm → StringOutputParser 构成一个简单的链
+    const chain = this.llm.pipe(new StringOutputParser())
+
+    // invoke 返回的是字符串，不是 AIMessage 对象
+    const answer = await chain.invoke([
+      new HumanMessage(message),
+    ])
+
+    return { question: message, answer }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br></div></div><h3 id="_2-4-models-controller-ts"><a href="#_2-4-models-controller-ts" class="header-anchor">#</a> 2.4 models.controller.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/models/models.controller.ts
+
+import { Controller, Post, Body, Res } from '@nestjs/common'
+import { Response } from 'express'
+import { ModelsService } from './models.service'
+
+@Controller('models')
+export class ModelsController {
+  constructor(private readonly modelsService: ModelsService) {}
+
+  // POST /models/chat → 基础问答（等完整回答）
+  @Post('chat')
+  basicChat(@Body() body: { message: string }) {
+    return this.modelsService.basicChat(body.message)
+  }
+
+  // POST /models/chat-system → 带 System Prompt 的问答
+  @Post('chat-system')
+  chatWithSystem(@Body() body: { system: string; message: string }) {
+    return this.modelsService.chatWithSystem(body.system, body.message)
+  }
+
+  // POST /models/chat-stream → SSE 流式输出
+  @Post('chat-stream')
+  streamChat(@Body() body: { message: string }, @Res() res: Response) {
+    return this.modelsService.streamChat(body.message, res)
+  }
+
+  // POST /models/chat-parser → 使用 pipe 链
+  @Post('chat-parser')
+  chatWithParser(@Body() body: { message: string }) {
+    return this.modelsService.chatWithParser(body.message)
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br></div></div><h3 id="_2-5-apifox-测试"><a href="#_2-5-apifox-测试" class="header-anchor">#</a> 2.5 Apifox 测试</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>POST http://localhost:3000/models/chat
+{ &quot;message&quot;: &quot;用一句话介绍 Vue3&quot; }
+
+POST http://localhost:3000/models/chat-system
+{ &quot;system&quot;: &quot;你是一个专业的前端开发导师，用简洁的语言解释技术概念&quot;, &quot;message&quot;: &quot;什么是 Pinia&quot; }
+
+POST http://localhost:3000/models/chat-stream
+{ &quot;message&quot;: &quot;写一首关于编程的短诗&quot; }
+注意：SSE 接口在 Apifox 里选 SSE 类型，可以看到逐字输出效果
+
+POST http://localhost:3000/models/chat-parser
+{ &quot;message&quot;: &quot;Prisma 是什么&quot; }
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><hr> <h2 id="三、prompts-可复用提示词工程"><a href="#三、prompts-可复用提示词工程" class="header-anchor">#</a> 三、Prompts — 可复用提示词工程</h2> <h3 id="_3-1-概念说明"><a href="#_3-1-概念说明" class="header-anchor">#</a> 3.1 概念说明</h3> <p>Prompts 是提示词模板系统，解决的问题是：<strong>同一类任务的提示词结构是固定的，只有变量部分不同</strong>。</p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>不用模板：
+  const prompt = `你是翻译专家，把&quot;${text}&quot;翻译成${lang}`
+  每次手动拼字符串，容易出错，无法复用
+
+用 ChatPromptTemplate：
+  const template = ChatPromptTemplate.fromMessages([
+    ['system', '你是翻译专家'],
+    ['human', '把&quot;{text}&quot;翻译成{lang}'],
+  ])
+  // {text} 和 {lang} 是占位符，调用时动态替换
+  await template.invoke({ text: 'Hello', lang: '中文' })
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h3 id="_3-2-prompts-service-ts"><a href="#_3-2-prompts-service-ts" class="header-anchor">#</a> 3.2 prompts.service.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/prompts/prompts.service.ts
+
+import { Injectable } from '@nestjs/common'
+import { ChatOllama } from '@langchain/ollama'
+import {
+  ChatPromptTemplate,
+  PromptTemplate,
+  FewShotPromptTemplate,
+} from '@langchain/core/prompts'
+import { StringOutputParser } from '@langchain/core/output_parsers'
+import { config } from '../config'
+
+@Injectable()
+export class PromptsService {
+  private llm = new ChatOllama({
+    model: config.ollama.chatModel,
+    baseUrl: config.ollama.baseUrl,
+    temperature: config.ollama.temperature,
+  })
+
+  // ── 方式一：ChatPromptTemplate（最常用）────────────────
+  // 支持多消息（system + human），支持变量占位符 {变量名}
+  async translateText(text: string, targetLang: string) {
+    // fromMessages 接收消息数组，每个元素是 [role, content] 格式
+    // content 里的 {变量名} 是占位符，invoke 时自动替换
+    const prompt = ChatPromptTemplate.fromMessages([
+      [
+        'system',
+        '你是一个专业翻译，只输出翻译结果，不要加任何解释。',
+      ],
+      [
+        'human',
+        '请把以下内容翻译成{targetLang}：\n\n{text}',
+      ],
+    ])
+
+    // pipe 把 prompt、llm、parser 串联成链
+    const chain = prompt.pipe(this.llm).pipe(new StringOutputParser())
+
+    // invoke 传入变量值，替换占位符
+    const result = await chain.invoke({ text, targetLang })
+
+    return { original: text, targetLang, translated: result }
+  }
+
+  // ── 方式二：PromptTemplate（单消息模板）────────────────
+  // 比 ChatPromptTemplate 简单，适合只有一条 human 消息的场景
+  async summarizeText(text: string, maxWords: number) {
+    // fromTemplate 直接传模板字符串
+    const prompt = PromptTemplate.fromTemplate(
+      '请用不超过{maxWords}个字总结以下内容，只输出总结，不要其他内容：\n\n{text}',
+    )
+
+    const chain = prompt.pipe(this.llm).pipe(new StringOutputParser())
+    const result = await chain.invoke({ text, maxWords })
+
+    return { original: text, maxWords, summary: result }
+  }
+
+  // ── 方式三：Few-Shot Prompt（样例提示）─────────────────
+  // 给模型提供几个示例，让模型学会输出格式
+  // 适合需要严格控制输出格式的场景
+  async classifyText(text: string) {
+    // 示例数组：展示正确的输入输出格式
+    const examples = [
+      { input: '这个产品太棒了！', output: '正面' },
+      { input: '完全不值这个价格', output: '负面' },
+      { input: '还可以吧，普通', output: '中性' },
+      { input: '强烈推荐！超出预期', output: '正面' },
+      { input: '很失望，不会再买了', output: '负面' },
+    ]
+
+    // 单个示例的格式模板
+    const examplePrompt = PromptTemplate.fromTemplate(
+      '输入：{input}\n输出：{output}',
+    )
+
+    // FewShotPromptTemplate 把示例和真实问题组合在一起
+    const fewShotPrompt = new FewShotPromptTemplate({
+      examples,
+      examplePrompt,
+      prefix: '你是情感分类专家，分析文本情感，只输出：正面、负面、中性之一。\n\n以下是示例：',
+      suffix: '输入：{input}\n输出：',
+      inputVariables: ['input'],
+    })
+
+    // FewShotPromptTemplate 最终格式化成一个字符串
+    // 然后作为 human 消息发给模型
+    const formattedPrompt = await fewShotPrompt.format({ input: text })
+    const response = await this.llm.invoke(formattedPrompt)
+
+    return {
+      text,
+      sentiment: String(response.content).trim(),
+    }
+  }
+
+  // ── 方式四：多步骤 Prompt 复用 ─────────────────────────
+  // 把常用 Prompt 封装成函数，在不同场景复用
+  async codeReview(code: string, language: string) {
+    // 代码审查 Prompt 模板
+    const reviewPrompt = ChatPromptTemplate.fromMessages([
+      [
+        'system',
+        `你是资深{language}开发工程师，负责代码审查。
+审查维度：
+1. 代码规范
+2. 潜在 Bug
+3. 性能问题
+4. 改进建议
+
+输出格式：
+- 总体评分（1-10分）
+- 具体问题列表
+- 改进后的代码片段（如有必要）`,
+      ],
+      ['human', '请审查以下{language}代码：\n\n```{language}\n{code}\n```'],
+    ])
+
+    const chain = reviewPrompt.pipe(this.llm).pipe(new StringOutputParser())
+    const result = await chain.invoke({ code, language })
+
+    return { language, code, review: result }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br></div></div><h3 id="_3-3-prompts-controller-ts"><a href="#_3-3-prompts-controller-ts" class="header-anchor">#</a> 3.3 prompts.controller.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/prompts/prompts.controller.ts
+
+import { Controller, Post, Body } from '@nestjs/common'
+import { PromptsService } from './prompts.service'
+
+@Controller('prompts')
+export class PromptsController {
+  constructor(private readonly promptsService: PromptsService) {}
+
+  // POST /prompts/translate → 翻译
+  @Post('translate')
+  translate(@Body() body: { text: string; targetLang: string }) {
+    return this.promptsService.translateText(body.text, body.targetLang)
+  }
+
+  // POST /prompts/summarize → 总结
+  @Post('summarize')
+  summarize(@Body() body: { text: string; maxWords: number }) {
+    return this.promptsService.summarizeText(body.text, body.maxWords)
+  }
+
+  // POST /prompts/classify → 情感分类（Few-Shot）
+  @Post('classify')
+  classify(@Body() body: { text: string }) {
+    return this.promptsService.classifyText(body.text)
+  }
+
+  // POST /prompts/code-review → 代码审查
+  @Post('code-review')
+  codeReview(@Body() body: { code: string; language: string }) {
+    return this.promptsService.codeReview(body.code, body.language)
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br></div></div><hr> <h2 id="四、chains-链式调用固定任务流"><a href="#四、chains-链式调用固定任务流" class="header-anchor">#</a> 四、Chains — 链式调用固定任务流</h2> <h3 id="_4-1-概念说明"><a href="#_4-1-概念说明" class="header-anchor">#</a> 4.1 概念说明</h3> <p>Chain 是把多个步骤串联起来的流水线，每一步的输出是下一步的输入。</p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>不用 Chain：
+  const step1 = await llm.invoke('分析这篇文章的主题')
+  const step2 = await llm.invoke(`基于主题&quot;${step1}&quot;，写一个标题`)
+  const step3 = await llm.invoke(`基于标题&quot;${step2}&quot;，写摘要`)
+  手动管理每步的输入输出，代码冗余
+
+用 Chain（LCEL 语法）：
+  const chain = prompt1 | llm | parser | prompt2 | llm | parser
+  const result = await chain.invoke({ article })
+  用 pipe（|）把步骤串联，自动传递数据
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p><strong>LCEL（LangChain Expression Language）</strong> 是 LangChain 的链式语法：</p> <ul><li><code>prompt.pipe(llm).pipe(parser)</code> 等价于 <code>prompt | llm | parser</code></li> <li>每个步骤的返回值自动传入下一步</li></ul> <h3 id="_4-2-chains-service-ts"><a href="#_4-2-chains-service-ts" class="header-anchor">#</a> 4.2 chains.service.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/chains/chains.service.ts
+
+import { Injectable } from '@nestjs/common'
+import { ChatOllama } from '@langchain/ollama'
+import { ChatPromptTemplate } from '@langchain/core/prompts'
+import { StringOutputParser } from '@langchain/core/output_parsers'
+import { RunnableSequence, RunnablePassthrough } from '@langchain/core/runnables'
+import { config } from '../config'
+
+@Injectable()
+export class ChainsService {
+  private llm = new ChatOllama({
+    model: config.ollama.chatModel,
+    baseUrl: config.ollama.baseUrl,
+    temperature: config.ollama.temperature,
+  })
+
+  private parser = new StringOutputParser()
+
+  // ── Chain 一：简单线性链 ────────────────────────────────
+  // 场景：文章润色（分析 → 润色）
+  async polishArticle(article: string) {
+    // 第一步：分析文章问题
+    const analyzePrompt = ChatPromptTemplate.fromMessages([
+      ['system', '你是专业编辑，只输出问题列表，不要其他内容。'],
+      ['human', '分析这篇文章存在哪些问题：\n\n{article}'],
+    ])
+
+    // 第二步：根据问题列表润色文章
+    const polishPrompt = ChatPromptTemplate.fromMessages([
+      ['system', '你是专业编辑，根据问题列表润色原文，保持原意。'],
+      [
+        'human',
+        '原文：\n{article}\n\n问题列表：\n{issues}\n\n请输出润色后的文章：',
+      ],
+    ])
+
+    // 第一条链：article → 分析问题 → issues 字符串
+    const analyzeChain = analyzePrompt.pipe(this.llm).pipe(this.parser)
+
+    // 第二条链：{ article, issues } → 润色文章 → 最终文章
+    const polishChain = polishPrompt.pipe(this.llm).pipe(this.parser)
+
+    // RunnableSequence：把多个步骤组合成一个完整链
+    const fullChain = RunnableSequence.from([
+      // 步骤一：同时保留原文，并调用分析链得到 issues
+      {
+        // RunnablePassthrough 直接透传输入值，不做任何处理
+        article: new RunnablePassthrough(),
+        issues: analyzeChain,
+      },
+      // 步骤二：把 { article, issues } 传给润色链
+      polishChain,
+    ])
+
+    // invoke 传入原始文章，链自动完成所有步骤
+    const result = await fullChain.invoke(article)
+
+    return { original: article, polished: result }
+  }
+
+  // ── Chain 二：顺序链（Sequential Chain）────────────────
+  // 场景：博客生成（关键词 → 大纲 → 文章 → SEO 标题）
+  async generateBlog(keywords: string, style: string) {
+    // 第一步：生成大纲
+    const outlinePrompt = ChatPromptTemplate.fromMessages([
+      ['system', '你是专业博客作者，只输出大纲，不要正文。'],
+      ['human', '根据关键词&quot;{keywords}&quot;，写一篇{style}风格的博客大纲（3-5个章节）'],
+    ])
+
+    // 第二步：根据大纲生成文章
+    const articlePrompt = ChatPromptTemplate.fromMessages([
+      ['system', '你是专业博客作者，按照大纲写完整文章。'],
+      ['human', '大纲：\n{outline}\n\n请写出完整的博客文章：'],
+    ])
+
+    // 第三步：生成 SEO 标题
+    const titlePrompt = ChatPromptTemplate.fromMessages([
+      ['system', '你是 SEO 专家，只输出5个候选标题，不要其他内容。'],
+      ['human', '根据以下文章，生成5个吸引点击的 SEO 标题：\n\n{article}'],
+    ])
+
+    // 执行第一步：生成大纲
+    const outlineChain = outlinePrompt.pipe(this.llm).pipe(this.parser)
+    const outline = await outlineChain.invoke({ keywords, style })
+
+    // 执行第二步：生成文章
+    const articleChain = articlePrompt.pipe(this.llm).pipe(this.parser)
+    const article = await articleChain.invoke({ outline })
+
+    // 执行第三步：生成 SEO 标题
+    const titleChain = titlePrompt.pipe(this.llm).pipe(this.parser)
+    const titles = await titleChain.invoke({ article })
+
+    return {
+      keywords,
+      style,
+      outline,
+      article,
+      seoTitles: titles,
+    }
+  }
+
+  // ── Chain 三：条件分支链（Router Chain）────────────────
+  // 场景：智能客服路由（根据问题类型路由到不同处理链）
+  async smartRouter(question: string) {
+    // 第一步：分类问题
+    const classifyPrompt = ChatPromptTemplate.fromMessages([
+      [
+        'system',
+        `分析用户问题，只输出分类标签（不要其他内容）：
+- 技术问题 → 输出: TECH
+- 退款问题 → 输出: REFUND
+- 投诉建议 → 输出: COMPLAINT
+- 其他 → 输出: OTHER`,
+      ],
+      ['human', '{question}'],
+    ])
+
+    // 获取问题分类
+    const classifyChain = classifyPrompt.pipe(this.llm).pipe(this.parser)
+    const category = (await classifyChain.invoke({ question })).trim()
+
+    // 第二步：根据分类选择不同 Prompt
+    const prompts = {
+      TECH: '你是技术支持专家，专业解答技术问题，给出具体操作步骤。',
+      REFUND: '你是退款专员，引导用户完成退款流程，态度友好。',
+      COMPLAINT: '你是客户关系专员，认真对待投诉，给出解决方案。',
+      OTHER: '你是通用客服，友好回答各类问题。',
+    }
+
+    const systemPrompt = prompts[category] || prompts.OTHER
+
+    const answerPrompt = ChatPromptTemplate.fromMessages([
+      ['system', systemPrompt],
+      ['human', '{question}'],
+    ])
+
+    const answerChain = answerPrompt.pipe(this.llm).pipe(this.parser)
+    const answer = await answerChain.invoke({ question })
+
+    return {
+      question,
+      category,
+      answer,
+    }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br></div></div><h3 id="_4-3-chains-controller-ts"><a href="#_4-3-chains-controller-ts" class="header-anchor">#</a> 4.3 chains.controller.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/chains/chains.controller.ts
+
+import { Controller, Post, Body } from '@nestjs/common'
+import { ChainsService } from './chains.service'
+
+@Controller('chains')
+export class ChainsController {
+  constructor(private readonly chainsService: ChainsService) {}
+
+  @Post('polish')
+  polishArticle(@Body() body: { article: string }) {
+    return this.chainsService.polishArticle(body.article)
+  }
+
+  @Post('blog')
+  generateBlog(@Body() body: { keywords: string; style: string }) {
+    return this.chainsService.generateBlog(body.keywords, body.style)
+  }
+
+  @Post('router')
+  smartRouter(@Body() body: { question: string }) {
+    return this.chainsService.smartRouter(body.question)
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><hr> <h2 id="五、agents-智能代理自主决策"><a href="#五、agents-智能代理自主决策" class="header-anchor">#</a> 五、Agents — 智能代理自主决策</h2> <h3 id="_5-1-概念说明"><a href="#_5-1-概念说明" class="header-anchor">#</a> 5.1 概念说明</h3> <p>Agent 和 Chain 的核心区别：</p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>Chain（固定流程）：
+  用户 → 步骤1 → 步骤2 → 步骤3 → 结束
+  流程提前写死，模型只负责生成内容
+
+Agent（自主决策）：
+  用户 → 模型思考 → 决定用哪个工具 → 调用工具 → 看结果 → 继续思考 → 最终回答
+  模型自主决定调用哪个工具、调用几次，最终给出答案
+  
+比喻：
+  Chain = 工厂流水线（固定工序）
+  Agent = 聪明的员工（自己决定做什么）
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h3 id="_5-2-agents-service-ts"><a href="#_5-2-agents-service-ts" class="header-anchor">#</a> 5.2 agents.service.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/agents/agents.service.ts
+
+import { Injectable } from '@nestjs/common'
+import { ChatOllama } from '@langchain/ollama'
+import { tool } from '@langchain/core/tools'
+import { z } from 'zod'
+import { HumanMessage, AIMessage, ToolMessage } from '@langchain/core/messages'
+import { config } from '../config'
+
+@Injectable()
+export class AgentsService {
+  // Agent 使用的模型，temperature 设低一点让决策更稳定
+  private llm = new ChatOllama({
+    model: config.ollama.chatModel,
+    baseUrl: config.ollama.baseUrl,
+    temperature: 0.1,
+  })
+
+  // ── 定义工具（Tools）──────────────────────────────────
+  // 工具就是模型可以调用的函数
+  // tool() 把普通函数包装成 LangChain 能识别的工具格式
+
+  // 工具一：计算器
+  private calculatorTool = tool(
+    async ({ expression }: { expression: string }) =&gt; {
+      try {
+        // 用 Function 执行数学表达式（注意：生产环境要用安全的计算库）
+        // eslint-disable-next-line no-new-func
+        const result = new Function(`return ${expression}`)()
+        return `计算结果：${expression} = ${result}`
+      } catch {
+        return `计算出错：无法计算 ${expression}`
+      }
+    },
+    {
+      // 工具名称（模型根据这个决定什么时候调用）
+      name: 'calculator',
+      // 工具描述（模型根据这个理解工具的用途）
+      description: '数学计算器，用于计算数学表达式，例如 2+3*4、sqrt(16)、100/5',
+      // 参数 Schema（告诉模型需要传什么参数）
+      schema: z.object({
+        expression: z.string().describe('数学表达式，例如 2+3*4'),
+      }),
+    },
+  )
+
+  // 工具二：获取当前时间
+  private timeTool = tool(
+    async () =&gt; {
+      const now = new Date()
+      return `当前时间：${now.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}`
+    },
+    {
+      name: 'get_current_time',
+      description: '获取当前的日期和时间',
+      schema: z.object({}),
+    },
+  )
+
+  // 工具三：单位换算
+  private unitConverterTool = tool(
+    async ({ value, fromUnit, toUnit }: { value: number; fromUnit: string; toUnit: string }) =&gt; {
+      const conversions: Record&lt;string, Record&lt;string, number&gt;&gt; = {
+        // 长度（基准：米）
+        km: { m: 1000, cm: 100000, mm: 1000000 },
+        m: { km: 0.001, cm: 100, mm: 1000 },
+        // 温度（特殊处理）
+        celsius: { fahrenheit: 1 },
+        fahrenheit: { celsius: 1 },
+      }
+
+      // 温度特殊换算
+      if (fromUnit === 'celsius' &amp;&amp; toUnit === 'fahrenheit') {
+        const result = value * 9 / 5 + 32
+        return `${value}°C = ${result.toFixed(2)}°F`
+      }
+      if (fromUnit === 'fahrenheit' &amp;&amp; toUnit === 'celsius') {
+        const result = (value - 32) * 5 / 9
+        return `${value}°F = ${result.toFixed(2)}°C`
+      }
+
+      // 普通换算
+      const rate = conversions[fromUnit]?.[toUnit]
+      if (!rate) return `不支持 ${fromUnit} 到 ${toUnit} 的换算`
+      return `${value} ${fromUnit} = ${value * rate} ${toUnit}`
+    },
+    {
+      name: 'unit_converter',
+      description: '单位换算工具，支持长度（km/m/cm/mm）和温度（celsius/fahrenheit）换算',
+      schema: z.object({
+        value: z.number().describe('要换算的数值'),
+        fromUnit: z.string().describe('原单位，例如 km、celsius'),
+        toUnit: z.string().describe('目标单位，例如 m、fahrenheit'),
+      }),
+    },
+  )
+
+  // ── Agent 核心逻辑 ─────────────────────────────────────
+  async runAgent(userMessage: string) {
+    // 把所有工具绑定到模型
+    // bindTools 告诉模型&quot;你可以调用这些工具&quot;
+    const tools = [this.calculatorTool, this.timeTool, this.unitConverterTool]
+    const llmWithTools = this.llm.bindTools(tools)
+
+    // 工具 Map，用于根据名称找到对应工具函数
+    const toolMap = {
+      calculator: this.calculatorTool,
+      get_current_time: this.timeTool,
+      unit_converter: this.unitConverterTool,
+    }
+
+    // 消息历史（Agent 的&quot;短期记忆&quot;）
+    const messages: (HumanMessage | AIMessage | ToolMessage)[] = [
+      new HumanMessage(userMessage),
+    ]
+
+    const steps: string[] = []
+
+    // Agent 循环：最多执行 5 轮，防止无限循环
+    for (let i = 0; i &lt; 5; i++) {
+      // 调用模型，让它决定下一步做什么
+      const response = await llmWithTools.invoke(messages)
+      messages.push(response)
+
+      // 如果模型没有调用工具，说明它已经有了最终答案
+      if (!response.tool_calls || response.tool_calls.length === 0) {
+        steps.push(`[最终回答] ${response.content}`)
+        break
+      }
+
+      // 模型决定调用工具，执行所有工具调用
+      for (const toolCall of response.tool_calls) {
+        const toolFn = toolMap[toolCall.name]
+        if (!toolFn) {
+          steps.push(`[工具不存在] ${toolCall.name}`)
+          continue
+        }
+
+        steps.push(`[调用工具] ${toolCall.name}(${JSON.stringify(toolCall.args)})`)
+
+        // 执行工具，获取结果
+        const toolResult = await toolFn.invoke(toolCall.args)
+        steps.push(`[工具结果] ${toolResult}`)
+
+        // 把工具结果加入消息历史，让模型看到结果后继续思考
+        messages.push(
+          new ToolMessage({
+            content: String(toolResult),
+            tool_call_id: toolCall.id,
+          }),
+        )
+      }
+    }
+
+    // 获取最终回答（最后一条 AI 消息的内容）
+    const lastAIMessage = [...messages].reverse().find(m =&gt; m instanceof AIMessage)
+    const finalAnswer = lastAIMessage?.content || '无法得出答案'
+
+    return {
+      question: userMessage,
+      steps,
+      answer: finalAnswer,
+    }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br><span class="line-number">160</span><br><span class="line-number">161</span><br><span class="line-number">162</span><br><span class="line-number">163</span><br><span class="line-number">164</span><br><span class="line-number">165</span><br></div></div><h3 id="_5-3-agents-controller-ts"><a href="#_5-3-agents-controller-ts" class="header-anchor">#</a> 5.3 agents.controller.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/agents/agents.controller.ts
+
+import { Controller, Post, Body } from '@nestjs/common'
+import { AgentsService } from './agents.service'
+
+@Controller('agents')
+export class AgentsController {
+  constructor(private readonly agentsService: AgentsService) {}
+
+  @Post('run')
+  runAgent(@Body() body: { message: string }) {
+    return this.agentsService.runAgent(body.message)
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h3 id="_5-4-测试用例"><a href="#_5-4-测试用例" class="header-anchor">#</a> 5.4 测试用例</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>POST http://localhost:3000/agents/run
+{ &quot;message&quot;: &quot;现在几点了？&quot; }
+→ Agent 调用 get_current_time 工具
+
+{ &quot;message&quot;: &quot;100 摄氏度等于多少华氏度？&quot; }
+→ Agent 调用 unit_converter 工具
+
+{ &quot;message&quot;: &quot;1024 * 768 等于多少？再加上 1920 * 1080 是多少？&quot; }
+→ Agent 调用两次 calculator 工具
+
+{ &quot;message&quot;: &quot;现在几点，再算一下 (99 + 1) * 2&quot; }
+→ Agent 同时调用 time 和 calculator 工具
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><hr> <h2 id="六、memory-多轮上下文记忆"><a href="#六、memory-多轮上下文记忆" class="header-anchor">#</a> 六、Memory — 多轮上下文记忆</h2> <h3 id="_6-1-概念说明"><a href="#_6-1-概念说明" class="header-anchor">#</a> 6.1 概念说明</h3> <p>Memory 解决的问题是：<strong>模型本身是无状态的，每次调用都是全新对话，不记得之前说了什么</strong>。</p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>没有 Memory：
+  用户：&quot;我叫大伟&quot;
+  模型：&quot;你好，大伟！&quot;
+  用户：&quot;我叫什么？&quot;
+  模型：&quot;我不知道你叫什么&quot;  ← 忘了！
+
+有了 Memory：
+  用户：&quot;我叫大伟&quot;
+  模型：&quot;你好，大伟！&quot;
+  用户：&quot;我叫什么？&quot;
+  模型：&quot;你叫大伟&quot;  ← 记住了
+  
+实现原理：
+  把历史消息存在内存 Map 里，每次对话都把历史消息一起发给模型
+  sessionId → [消息1, 消息2, 消息3, ...]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="_6-2-memory-service-ts"><a href="#_6-2-memory-service-ts" class="header-anchor">#</a> 6.2 memory.service.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/memory/memory.service.ts
+
+import { Injectable } from '@nestjs/common'
+import { Response } from 'express'
+import { ChatOllama } from '@langchain/ollama'
+import {
+  HumanMessage,
+  AIMessage,
+  SystemMessage,
+  BaseMessage,
+} from '@langchain/core/messages'
+import { config } from '../config'
+
+@Injectable()
+export class MemoryService {
+  private llm = new ChatOllama({
+    model: config.ollama.chatModel,
+    baseUrl: config.ollama.baseUrl,
+    temperature: config.ollama.temperature,
+  })
+
+  // 用 Map 存储所有会话的消息历史
+  // key：sessionId（会话 ID）
+  // value：消息数组（包含 System、Human、AI 消息）
+  private sessions = new Map&lt;string, BaseMessage[]&gt;()
+
+  // 系统提示词（每个会话共用）
+  private systemMessage = new SystemMessage(
+    '你是一个智能助手，能记住对话历史，根据上下文给出准确回答。',
+  )
+
+  // ── 初始化会话 ─────────────────────────────────────────
+  private getOrCreateSession(sessionId: string): BaseMessage[] {
+    if (!this.sessions.has(sessionId)) {
+      // 新会话：初始化时加入系统消息
+      this.sessions.set(sessionId, [this.systemMessage])
+    }
+    return this.sessions.get(sessionId)!
+  }
+
+  // ── 多轮对话（REST 版本）──────────────────────────────
+  async chat(sessionId: string, message: string) {
+    // 获取该会话的消息历史
+    const history = this.getOrCreateSession(sessionId)
+
+    // 把用户新消息加入历史
+    history.push(new HumanMessage(message))
+
+    // 把完整历史（含本次消息）发给模型
+    // 模型看到完整历史，能理解上下文
+    const response = await this.llm.invoke(history)
+
+    // 把模型回复也加入历史，下次对话时一起发送
+    history.push(response)
+
+    return {
+      sessionId,
+      message,
+      reply: response.content,
+      // 返回当前会话轮次（去掉 System 消息后除以 2）
+      turns: Math.floor((history.length - 1) / 2),
+    }
+  }
+
+  // ── 多轮对话（SSE 流式版本）──────────────────────────
+  async chatStream(sessionId: string, message: string, res: Response) {
+    res.setHeader('Content-Type', 'text/event-stream')
+    res.setHeader('Cache-Control', 'no-cache')
+    res.setHeader('Connection', 'keep-alive')
+    res.setHeader('Access-Control-Allow-Origin', '*')
+
+    const history = this.getOrCreateSession(sessionId)
+    history.push(new HumanMessage(message))
+
+    // 收集完整回复，用于存入历史
+    let fullReply = ''
+
+    const stream = await this.llm.stream(history)
+
+    for await (const chunk of stream) {
+      if (chunk.content) {
+        const text = String(chunk.content)
+        fullReply += text
+        res.write(`data: ${JSON.stringify({ text, sessionId })}\n\n`)
+      }
+    }
+
+    // 流结束后，把完整回复存入历史
+    history.push(new AIMessage(fullReply))
+
+    res.write(`data: ${JSON.stringify({ text: '[DONE]', turns: Math.floor((history.length - 1) / 2) })}\n\n`)
+    res.end()
+  }
+
+  // ── 获取会话历史 ──────────────────────────────────────
+  getHistory(sessionId: string) {
+    const history = this.sessions.get(sessionId)
+    if (!history) {
+      return { sessionId, exists: false, messages: [] }
+    }
+
+    // 格式化消息，过滤掉 System 消息
+    const messages = history
+      .filter(m =&gt; !(m instanceof SystemMessage))
+      .map((m, i) =&gt; ({
+        index: i + 1,
+        role: m instanceof HumanMessage ? 'user' : 'assistant',
+        content: m.content,
+      }))
+
+    return {
+      sessionId,
+      exists: true,
+      turns: Math.floor(messages.length / 2),
+      messages,
+    }
+  }
+
+  // ── 清空会话历史 ──────────────────────────────────────
+  clearSession(sessionId: string) {
+    if (this.sessions.has(sessionId)) {
+      // 保留 System 消息，清空其他消息
+      this.sessions.set(sessionId, [this.systemMessage])
+      return { sessionId, cleared: true, message: '会话已清空' }
+    }
+    return { sessionId, cleared: false, message: '会话不存在' }
+  }
+
+  // ── 获取所有会话列表 ──────────────────────────────────
+  listSessions() {
+    const sessions = Array.from(this.sessions.entries()).map(([id, history]) =&gt; ({
+      sessionId: id,
+      turns: Math.floor((history.length - 1) / 2),
+    }))
+    return { total: sessions.length, sessions }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br></div></div><h3 id="_6-3-memory-controller-ts"><a href="#_6-3-memory-controller-ts" class="header-anchor">#</a> 6.3 memory.controller.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/memory/memory.controller.ts
+
+import { Controller, Post, Get, Delete, Body, Param, Res } from '@nestjs/common'
+import { Response } from 'express'
+import { MemoryService } from './memory.service'
+
+@Controller('memory')
+export class MemoryController {
+  constructor(private readonly memoryService: MemoryService) {}
+
+  // POST /memory/chat → 多轮对话（普通）
+  @Post('chat')
+  chat(@Body() body: { sessionId: string; message: string }) {
+    return this.memoryService.chat(body.sessionId, body.message)
+  }
+
+  // POST /memory/chat-stream → 多轮对话（流式）
+  @Post('chat-stream')
+  chatStream(
+    @Body() body: { sessionId: string; message: string },
+    @Res() res: Response,
+  ) {
+    return this.memoryService.chatStream(body.sessionId, body.message, res)
+  }
+
+  // GET /memory/history/:sessionId → 查看会话历史
+  @Get('history/:sessionId')
+  getHistory(@Param('sessionId') sessionId: string) {
+    return this.memoryService.getHistory(sessionId)
+  }
+
+  // DELETE /memory/session/:sessionId → 清空会话
+  @Delete('session/:sessionId')
+  clearSession(@Param('sessionId') sessionId: string) {
+    return this.memoryService.clearSession(sessionId)
+  }
+
+  // GET /memory/sessions → 所有会话列表
+  @Get('sessions')
+  listSessions() {
+    return this.memoryService.listSessions()
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br></div></div><h3 id="_6-4-测试-验证记忆能力"><a href="#_6-4-测试-验证记忆能力" class="header-anchor">#</a> 6.4 测试：验证记忆能力</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>第一轮：
+POST http://localhost:3000/memory/chat
+{ &quot;sessionId&quot;: &quot;user-001&quot;, &quot;message&quot;: &quot;我叫大伟，是一名前端开发者&quot; }
+
+第二轮：
+POST http://localhost:3000/memory/chat
+{ &quot;sessionId&quot;: &quot;user-001&quot;, &quot;message&quot;: &quot;我叫什么？做什么工作的？&quot; }
+→ 模型应该能回答&quot;你叫大伟，是前端开发者&quot;
+
+第三轮：
+POST http://localhost:3000/memory/chat
+{ &quot;sessionId&quot;: &quot;user-001&quot;, &quot;message&quot;: &quot;给我推荐一些适合我的学习资源&quot; }
+→ 模型根据&quot;前端开发者&quot;的上下文推荐前端学习资源
+
+查看历史：
+GET http://localhost:3000/memory/history/user-001
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><hr> <h2 id="七、rag-检索增强生成"><a href="#七、rag-检索增强生成" class="header-anchor">#</a> 七、RAG — 检索增强生成</h2> <h3 id="_7-1-概念说明"><a href="#_7-1-概念说明" class="header-anchor">#</a> 7.1 概念说明</h3> <p>RAG 解决的问题：<strong>模型不知道你的私有知识（公司文档、产品手册等）</strong>。</p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>没有 RAG：
+  用户：&quot;我们公司的请假流程是什么？&quot;
+  模型：&quot;我不知道你们公司的规定...&quot;
+
+有了 RAG：
+  1. 提前把公司文档切块存入内存向量库
+  2. 用户提问时，先检索最相关的文档块
+  3. 把检索结果拼进 Prompt 发给模型
+  4. 模型基于提供的资料回答，不会乱编
+
+本文档：使用内存向量库（MemoryVectorStore），不依赖 Chroma 服务
+实际项目：换成 Chroma / Milvus 等持久化向量数据库即可
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><h3 id="_7-2-rag-service-ts"><a href="#_7-2-rag-service-ts" class="header-anchor">#</a> 7.2 rag.service.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/rag/rag.service.ts
+
+import { Injectable } from '@nestjs/common'
+import { ChatOllama, OllamaEmbeddings } from '@langchain/ollama'
+import { ChatPromptTemplate } from '@langchain/core/prompts'
+import { StringOutputParser } from '@langchain/core/output_parsers'
+import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters'
+import { Document } from '@langchain/core/documents'
+import { MemoryVectorStore } from 'langchain/vectorstores/memory'
+import { config } from '../config'
+
+@Injectable()
+export class RagService {
+  private llm = new ChatOllama({
+    model: config.ollama.chatModel,
+    baseUrl: config.ollama.baseUrl,
+    temperature: 0.1, // RAG 场景用低温度，让回答更准确
+  })
+
+  // OllamaEmbeddings：把文本转成向量（用于相似度检索）
+  private embeddings = new OllamaEmbeddings({
+    model: config.ollama.embedModel,
+    baseUrl: config.ollama.baseUrl,
+  })
+
+  // MemoryVectorStore：内存向量库（无需部署 Chroma）
+  // 适合学习演示，生产环境换成 Chroma
+  private vectorStore: MemoryVectorStore | null = null
+
+  // 记录已加载的文档数量
+  private docCount = 0
+
+  // ── 加载文档到向量库 ───────────────────────────────────
+  async loadDocuments(documents: { id: string; content: string; source?: string }[]) {
+    // 文本分块器：把长文档切成小块
+    const splitter = new RecursiveCharacterTextSplitter({
+      chunkSize: 500,        // 每块最大 500 字符
+      chunkOverlap: 50,      // 相邻块重叠 50 字符，防止语义被切断
+      separators: ['\n\n', '\n', '。', '！', '？', ' ', ''],
+    })
+
+    const allDocs: Document[] = []
+
+    for (const doc of documents) {
+      // createDocuments 把文本切成多个 Document 对象
+      const chunks = await splitter.createDocuments(
+        [doc.content],
+        [{ source: doc.source || doc.id, docId: doc.id }],
+      )
+      allDocs.push(...chunks)
+    }
+
+    // 创建内存向量库，自动对所有文档向量化
+    // fromDocuments 内部调用 embeddings.embedDocuments()
+    this.vectorStore = await MemoryVectorStore.fromDocuments(
+      allDocs,
+      this.embeddings,
+    )
+
+    this.docCount = documents.length
+
+    return {
+      success: true,
+      originalDocs: documents.length,
+      totalChunks: allDocs.length,
+      message: `成功加载 ${documents.length} 篇文档，共切成 ${allDocs.length} 个块`,
+    }
+  }
+
+  // ── 纯检索（不过大模型）──────────────────────────────
+  async search(query: string, topK = 3) {
+    if (!this.vectorStore) {
+      return { error: '请先调用 /rag/load 加载文档' }
+    }
+
+    // similaritySearchWithScore 返回 [Document, score] 数组
+    // score 是余弦相似度，越高越相关
+    const results = await this.vectorStore.similaritySearchWithScore(query, topK)
+
+    return {
+      query,
+      results: results.map(([doc, score]) =&gt; ({
+        content: doc.pageContent,
+        source: doc.metadata.source,
+        score: parseFloat(score.toFixed(4)),
+      })),
+    }
+  }
+
+  // ── 完整 RAG 问答 ─────────────────────────────────────
+  async query(question: string, topK = 3) {
+    if (!this.vectorStore) {
+      return { error: '请先调用 /rag/load 加载文档' }
+    }
+
+    // Step 1：检索最相关的文档块
+    const retrieved = await this.vectorStore.similaritySearchWithScore(
+      question,
+      topK,
+    )
+
+    if (retrieved.length === 0) {
+      return {
+        question,
+        answer: '知识库中没有找到相关内容',
+        sources: [],
+      }
+    }
+
+    // Step 2：把检索到的文档拼成 context 字符串
+    const context = retrieved
+      .map(([doc], i) =&gt; `[${i + 1}] ${doc.pageContent}`)
+      .join('\n\n')
+
+    // Step 3：构建 RAG Prompt
+    const prompt = ChatPromptTemplate.fromMessages([
+      [
+        'system',
+        `你是知识库问答助手，严格基于以下参考资料回答问题。
+
+规则：
+1. 只根据参考资料内容回答，不要使用资料外的知识
+2. 如果资料中没有相关信息，回答&quot;知识库中暂无相关内容&quot;
+3. 回答简洁准确，使用中文
+4. 可以说明答案来自第几条参考资料
+
+参考资料：
+{context}`,
+      ],
+      ['human', '{question}'],
+    ])
+
+    // Step 4：调用模型生成回答
+    const chain = prompt.pipe(this.llm).pipe(new StringOutputParser())
+    const answer = await chain.invoke({ context, question })
+
+    return {
+      question,
+      answer,
+      sources: retrieved.map(([doc, score]) =&gt; ({
+        content: doc.pageContent,
+        source: doc.metadata.source,
+        score: parseFloat(score.toFixed(4)),
+      })),
+    }
+  }
+
+  // ── 查询知识库状态 ────────────────────────────────────
+  getStatus() {
+    return {
+      loaded: this.vectorStore !== null,
+      docCount: this.docCount,
+      message: this.vectorStore ? `知识库已加载 ${this.docCount} 篇文档` : '知识库为空，请先加载文档',
+    }
+  }
+
+  // ── 清空知识库 ────────────────────────────────────────
+  clearKnowledge() {
+    this.vectorStore = null
+    this.docCount = 0
+    return { success: true, message: '知识库已清空' }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br><span class="line-number">160</span><br><span class="line-number">161</span><br><span class="line-number">162</span><br><span class="line-number">163</span><br></div></div><h3 id="_7-3-rag-controller-ts"><a href="#_7-3-rag-controller-ts" class="header-anchor">#</a> 7.3 rag.controller.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/rag/rag.controller.ts
+
+import { Controller, Post, Get, Delete, Body } from '@nestjs/common'
+import { RagService } from './rag.service'
+
+@Controller('rag')
+export class RagController {
+  constructor(private readonly ragService: RagService) {}
+
+  // POST /rag/load → 加载文档到知识库
+  @Post('load')
+  loadDocuments(
+    @Body() body: {
+      documents: { id: string; content: string; source?: string }[]
+    },
+  ) {
+    return this.ragService.loadDocuments(body.documents)
+  }
+
+  // POST /rag/search → 纯向量检索（不过大模型）
+  @Post('search')
+  search(@Body() body: { query: string; topK?: number }) {
+    return this.ragService.search(body.query, body.topK)
+  }
+
+  // POST /rag/query → 完整 RAG 问答
+  @Post('query')
+  query(@Body() body: { question: string; topK?: number }) {
+    return this.ragService.query(body.question, body.topK)
+  }
+
+  // GET /rag/status → 知识库状态
+  @Get('status')
+  getStatus() {
+    return this.ragService.getStatus()
+  }
+
+  // DELETE /rag/clear → 清空知识库
+  @Delete('clear')
+  clearKnowledge() {
+    return this.ragService.clearKnowledge()
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br></div></div><hr> <h2 id="八、function-calling-工具调用"><a href="#八、function-calling-工具调用" class="header-anchor">#</a> 八、Function Calling — 工具调用</h2> <h3 id="_8-1-概念说明"><a href="#_8-1-概念说明" class="header-anchor">#</a> 8.1 概念说明</h3> <p>Function Calling 是让模型调用真实外部函数的能力，和 Agent 中的工具调用类似，但更专注于<strong>结构化输出</strong>。</p> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>和 Agent 的区别：
+  Agent：模型自主决定调用哪个工具、调用几次（多步骤）
+  Function Calling：模型决定是否调用、返回结构化参数（通常单步）
+
+实际应用场景：
+  → 查询天气、查数据库、发邮件、创建日历事件
+  → 任何需要把自然语言转成结构化参数的场景
+
+执行流程：
+  用户：&quot;明天上午 10 点提醒我开会&quot;
+  模型分析后返回：
+    { &quot;tool&quot;: &quot;create_reminder&quot;, &quot;time&quot;: &quot;2025-01-15 10:00&quot;, &quot;message&quot;: &quot;开会&quot; }
+  代码执行 create_reminder 函数，完成创建
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="_8-2-function-calling-service-ts"><a href="#_8-2-function-calling-service-ts" class="header-anchor">#</a> 8.2 function-calling.service.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/function-calling/function-calling.service.ts
+
+import { Injectable } from '@nestjs/common'
+import { ChatOllama } from '@langchain/ollama'
+import { tool } from '@langchain/core/tools'
+import { z } from 'zod'
+import { HumanMessage, ToolMessage } from '@langchain/core/messages'
+import { config } from '../config'
+
+@Injectable()
+export class FunctionCallingService {
+  private llm = new ChatOllama({
+    model: config.ollama.chatModel,
+    baseUrl: config.ollama.baseUrl,
+    temperature: 0,  // Function Calling 用 0，保证输出格式稳定
+  })
+
+  // ── 定义业务函数工具 ──────────────────────────────────
+
+  // 工具一：查询商品库存
+  private checkInventoryTool = tool(
+    async ({ productName }: { productName: string }) =&gt; {
+      // 模拟数据库查询
+      const inventory: Record&lt;string, { stock: number; price: number }&gt; = {
+        'iPhone 16': { stock: 50, price: 7999 },
+        'MacBook Pro': { stock: 10, price: 15999 },
+        'AirPods Pro': { stock: 200, price: 1799 },
+        'iPad Air': { stock: 30, price: 4799 },
+      }
+
+      const item = inventory[productName]
+      if (!item) {
+        return JSON.stringify({ found: false, message: `未找到商品：${productName}` })
+      }
+
+      return JSON.stringify({
+        found: true,
+        productName,
+        stock: item.stock,
+        price: item.price,
+        status: item.stock &gt; 0 ? '有货' : '缺货',
+      })
+    },
+    {
+      name: 'check_inventory',
+      description: '查询商品库存和价格信息',
+      schema: z.object({
+        productName: z.string().describe('商品名称，例如 iPhone 16、MacBook Pro'),
+      }),
+    },
+  )
+
+  // 工具二：创建订单
+  private createOrderTool = tool(
+    async ({ productName, quantity, customerName }: {
+      productName: string
+      quantity: number
+      customerName: string
+    }) =&gt; {
+      // 模拟创建订单
+      const orderId = `ORD-${Date.now()}`
+      return JSON.stringify({
+        success: true,
+        orderId,
+        productName,
+        quantity,
+        customerName,
+        createdAt: new Date().toLocaleString('zh-CN'),
+        message: `订单 ${orderId} 创建成功`,
+      })
+    },
+    {
+      name: 'create_order',
+      description: '为客户创建购买订单',
+      schema: z.object({
+        productName: z.string().describe('商品名称'),
+        quantity: z.number().describe('购买数量'),
+        customerName: z.string().describe('客户姓名'),
+      }),
+    },
+  )
+
+  // 工具三：查询订单状态
+  private checkOrderTool = tool(
+    async ({ orderId }: { orderId: string }) =&gt; {
+      // 模拟订单状态
+      const statuses = ['待支付', '已支付', '备货中', '已发货', '已完成']
+      const randomStatus = statuses[Math.floor(Math.random() * statuses.length)]
+      return JSON.stringify({
+        orderId,
+        status: randomStatus,
+        updatedAt: new Date().toLocaleString('zh-CN'),
+      })
+    },
+    {
+      name: 'check_order',
+      description: '查询订单状态',
+      schema: z.object({
+        orderId: z.string().describe('订单号，格式 ORD-XXXXX'),
+      }),
+    },
+  )
+
+  // ── Function Calling 核心逻辑 ─────────────────────────
+  async runFunctionCalling(userMessage: string) {
+    const tools = [
+      this.checkInventoryTool,
+      this.createOrderTool,
+      this.checkOrderTool,
+    ]
+
+    // 工具注册 Map
+    const toolMap = {
+      check_inventory: this.checkInventoryTool,
+      create_order: this.createOrderTool,
+      check_order: this.checkOrderTool,
+    }
+
+    // 把工具绑定到模型
+    const llmWithTools = this.llm.bindTools(tools)
+
+    const messages: any[] = [new HumanMessage(userMessage)]
+    const toolCallLog: any[] = []
+
+    // 执行对话（最多 3 轮工具调用）
+    for (let round = 0; round &lt; 3; round++) {
+      const response = await llmWithTools.invoke(messages)
+      messages.push(response)
+
+      // 没有工具调用，返回最终答案
+      if (!response.tool_calls || response.tool_calls.length === 0) {
+        break
+      }
+
+      // 执行所有工具调用
+      for (const toolCall of response.tool_calls) {
+        const toolFn = toolMap[toolCall.name]
+        if (!toolFn) continue
+
+        // 执行工具函数
+        const result = await toolFn.invoke(toolCall.args)
+
+        toolCallLog.push({
+          tool: toolCall.name,
+          args: toolCall.args,
+          result: JSON.parse(result),
+        })
+
+        // 把工具结果加入消息历史
+        messages.push(
+          new ToolMessage({
+            content: result,
+            tool_call_id: toolCall.id,
+          }),
+        )
+      }
+    }
+
+    // 最后一条 AI 消息的内容就是最终回答
+    const lastMessage = [...messages].reverse().find(m =&gt; m.constructor.name === 'AIMessage')
+    const finalAnswer = lastMessage?.content || '处理完成'
+
+    return {
+      userMessage,
+      toolCalls: toolCallLog,
+      finalAnswer,
+    }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br><span class="line-number">160</span><br><span class="line-number">161</span><br><span class="line-number">162</span><br><span class="line-number">163</span><br><span class="line-number">164</span><br><span class="line-number">165</span><br><span class="line-number">166</span><br><span class="line-number">167</span><br><span class="line-number">168</span><br><span class="line-number">169</span><br></div></div><h3 id="_8-3-function-calling-controller-ts"><a href="#_8-3-function-calling-controller-ts" class="header-anchor">#</a> 8.3 function-calling.controller.ts</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/function-calling/function-calling.controller.ts
+
+import { Controller, Post, Body } from '@nestjs/common'
+import { FunctionCallingService } from './function-calling.service'
+
+@Controller('function-calling')
+export class FunctionCallingController {
+  constructor(private readonly fcService: FunctionCallingService) {}
+
+  // POST /function-calling/run → 执行 Function Calling
+  @Post('run')
+  run(@Body() body: { message: string }) {
+    return this.fcService.runFunctionCalling(body.message)
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="_8-4-测试用例"><a href="#_8-4-测试用例" class="header-anchor">#</a> 8.4 测试用例</h3> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>POST http://localhost:3000/function-calling/run
+
+{ &quot;message&quot;: &quot;iPhone 16 还有货吗？多少钱？&quot; }
+→ 调用 check_inventory 工具
+
+{ &quot;message&quot;: &quot;我要买 2 台 MacBook Pro，我叫大伟&quot; }
+→ 先调用 check_inventory 查库存，再调用 create_order 创建订单
+
+{ &quot;message&quot;: &quot;帮我查一下订单 ORD-123456 的状态&quot; }
+→ 调用 check_order 工具
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><hr> <h2 id="九、apifox-完整测试"><a href="#九、apifox-完整测试" class="header-anchor">#</a> 九、Apifox 完整测试</h2> <p>启动服务：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 确认 Ollama 已启动且模型已拉取</span>
+ollama list
+<span class="token comment"># 应看到 qwen3.5:0.8b 和 mxbai-embed-large</span>
+
+<span class="token function">npm</span> run start:dev
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="所有接口汇总"><a href="#所有接口汇总" class="header-anchor">#</a> 所有接口汇总</h3> <table><thead><tr><th>模块</th> <th>方法</th> <th>路径</th> <th>说明</th></tr></thead> <tbody><tr><td>Models</td> <td>POST</td> <td>/models/chat</td> <td>基础问答</td></tr> <tr><td>Models</td> <td>POST</td> <td>/models/chat-system</td> <td>带 System 问答</td></tr> <tr><td>Models</td> <td>POST</td> <td>/models/chat-stream</td> <td>SSE 流式输出</td></tr> <tr><td>Models</td> <td>POST</td> <td>/models/chat-parser</td> <td>pipe 链调用</td></tr> <tr><td>Prompts</td> <td>POST</td> <td>/prompts/translate</td> <td>翻译</td></tr> <tr><td>Prompts</td> <td>POST</td> <td>/prompts/summarize</td> <td>文章总结</td></tr> <tr><td>Prompts</td> <td>POST</td> <td>/prompts/classify</td> <td>情感分类（Few-Shot）</td></tr> <tr><td>Prompts</td> <td>POST</td> <td>/prompts/code-review</td> <td>代码审查</td></tr> <tr><td>Chains</td> <td>POST</td> <td>/chains/polish</td> <td>文章润色（多步链）</td></tr> <tr><td>Chains</td> <td>POST</td> <td>/chains/blog</td> <td>博客生成（顺序链）</td></tr> <tr><td>Chains</td> <td>POST</td> <td>/chains/router</td> <td>客服路由（条件链）</td></tr> <tr><td>Agents</td> <td>POST</td> <td>/agents/run</td> <td>智能代理执行</td></tr> <tr><td>Memory</td> <td>POST</td> <td>/memory/chat</td> <td>多轮对话</td></tr> <tr><td>Memory</td> <td>POST</td> <td>/memory/chat-stream</td> <td>多轮对话（流式）</td></tr> <tr><td>Memory</td> <td>GET</td> <td>/memory/history/:id</td> <td>查看会话历史</td></tr> <tr><td>Memory</td> <td>DELETE</td> <td>/memory/session/:id</td> <td>清空会话</td></tr> <tr><td>Memory</td> <td>GET</td> <td>/memory/sessions</td> <td>所有会话列表</td></tr> <tr><td>RAG</td> <td>POST</td> <td>/rag/load</td> <td>加载文档到知识库</td></tr> <tr><td>RAG</td> <td>POST</td> <td>/rag/search</td> <td>纯向量检索</td></tr> <tr><td>RAG</td> <td>POST</td> <td>/rag/query</td> <td>完整 RAG 问答</td></tr> <tr><td>RAG</td> <td>GET</td> <td>/rag/status</td> <td>知识库状态</td></tr> <tr><td>RAG</td> <td>DELETE</td> <td>/rag/clear</td> <td>清空知识库</td></tr> <tr><td>Function Calling</td> <td>POST</td> <td>/function-calling/run</td> <td>工具调用</td></tr></tbody></table> <h3 id="rag-测试数据-加载知识库用"><a href="#rag-测试数据-加载知识库用" class="header-anchor">#</a> RAG 测试数据（加载知识库用）</h3> <div class="language-json line-numbers-mode"><pre class="language-json"><code>POST http<span class="token operator">:</span><span class="token comment">//localhost:3000/rag/load</span>
+<span class="token punctuation">{</span>
+  <span class="token property">&quot;documents&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;doc-001&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;source&quot;</span><span class="token operator">:</span> <span class="token string">&quot;公司手册&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;content&quot;</span><span class="token operator">:</span> <span class="token string">&quot;员工请假流程：1. 提前3天在OA系统提交申请。2. 直属领导审批。3. HR备案。病假需提供医院证明。年假每年15天，入职满一年后生效。&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;doc-002&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;source&quot;</span><span class="token operator">:</span> <span class="token string">&quot;技术文档&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;content&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Vue3的Composition API是Vue3最重要的新特性。通过setup函数或script setup语法糖，可以把相关逻辑组织在一起。ref用于基础类型响应式，reactive用于对象类型响应式。computed用于计算属性。&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;doc-003&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;source&quot;</span><span class="token operator">:</span> <span class="token string">&quot;产品手册&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;content&quot;</span><span class="token operator">:</span> <span class="token string">&quot;我们的产品支持三种付款方式：支付宝、微信支付、银行卡。退款政策：7天无理由退款。退款到账时间1-3个工作日。如有问题请联系客服：400-123-4567。&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><div class="language-json line-numbers-mode"><pre class="language-json"><code>POST http<span class="token operator">:</span><span class="token comment">//localhost:3000/rag/query</span>
+<span class="token punctuation">{</span> <span class="token property">&quot;question&quot;</span><span class="token operator">:</span> <span class="token string">&quot;请假需要提前几天申请？&quot;</span> <span class="token punctuation">}</span>
+
+POST http<span class="token operator">:</span><span class="token comment">//localhost:3000/rag/query</span>
+<span class="token punctuation">{</span> <span class="token property">&quot;question&quot;</span><span class="token operator">:</span> <span class="token string">&quot;退款要多久到账？&quot;</span> <span class="token punctuation">}</span>
+
+POST http<span class="token operator">:</span><span class="token comment">//localhost:3000/rag/query</span>
+<span class="token punctuation">{</span> <span class="token property">&quot;question&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Vue3的ref和reactive有什么区别？&quot;</span> <span class="token punctuation">}</span>
+
+POST http<span class="token operator">:</span><span class="token comment">//localhost:3000/rag/query</span>
+<span class="token punctuation">{</span> <span class="token property">&quot;question&quot;</span><span class="token operator">:</span> <span class="token string">&quot;公司股价是多少？&quot;</span> <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>最后一个问题，模型应该回答&quot;知识库中暂无相关内容&quot;，而不是乱编。</p> <hr> <h2 id="附-app-module-ts-最终版本"><a href="#附-app-module-ts-最终版本" class="header-anchor">#</a> 附：app.module.ts 最终版本</h2> <div class="language-plain line-numbers-mode"><pre class="language-plain"><code>// src/app.module.ts
+
+import { Module } from '@nestjs/common'
+import { ModelsModule } from './models/models.module'
+import { PromptsModule } from './prompts/prompts.module'
+import { ChainsModule } from './chains/chains.module'
+import { AgentsModule } from './agents/agents.module'
+import { MemoryModule } from './memory/memory.module'
+import { RagModule } from './rag/rag.module'
+import { FunctionCallingModule } from './function-calling/function-calling.module'
+
+@Module({
+  imports: [
+    ModelsModule,
+    PromptsModule,
+    ChainsModule,
+    AgentsModule,
+    MemoryModule,
+    RagModule,
+    FunctionCallingModule,
+  ],
+})
+export class AppModule {}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><hr> <h2 id="附-安装命令汇总"><a href="#附-安装命令汇总" class="header-anchor">#</a> 附：安装命令汇总</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 创建项目</span>
+nest new nestjs-llm-demo
+<span class="token builtin class-name">cd</span> nestjs-llm-demo
+
+<span class="token comment"># 安装依赖</span>
+<span class="token function">npm</span> <span class="token function">install</span> @langchain/ollama @langchain/core @langchain/community
+<span class="token function">npm</span> <span class="token function">install</span> @langchain/textsplitters langchain zod
+
+<span class="token comment"># 拉取 Ollama 模型</span>
+ollama pull qwen3.5:0.8b       <span class="token comment"># 对话模型（1GB）</span>
+ollama pull mxbai-embed-large  <span class="token comment"># 向量化模型（RAG用，669MB）</span>
+
+<span class="token comment"># 启动</span>
+<span class="token function">npm</span> run start:dev
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#目录" class="sidebar-link reco-side-目录" data-v-b57cc07c>目录</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#一、整体架构和项目初始化" class="sidebar-link reco-side-一、整体架构和项目初始化" data-v-b57cc07c>一、整体架构和项目初始化</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_1-1-每个模块解决什么问题" class="sidebar-link reco-side-_1-1-每个模块解决什么问题" data-v-b57cc07c>1.1 每个模块解决什么问题</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_1-2-数据流总览" class="sidebar-link reco-side-_1-2-数据流总览" data-v-b57cc07c>1.2 数据流总览</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_1-3-创建项目" class="sidebar-link reco-side-_1-3-创建项目" data-v-b57cc07c>1.3 创建项目</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_1-4-全局配置文件" class="sidebar-link reco-side-_1-4-全局配置文件" data-v-b57cc07c>1.4 全局配置文件</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_1-5-项目最终目录结构" class="sidebar-link reco-side-_1-5-项目最终目录结构" data-v-b57cc07c>1.5 项目最终目录结构</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#二、models-统一对接-llm-接口" class="sidebar-link reco-side-二、models-统一对接-llm-接口" data-v-b57cc07c>二、Models — 统一对接 LLM 接口</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_2-1-概念说明" class="sidebar-link reco-side-_2-1-概念说明" data-v-b57cc07c>2.1 概念说明</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_2-2-核心类说明" class="sidebar-link reco-side-_2-2-核心类说明" data-v-b57cc07c>2.2 核心类说明</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_2-3-models-service-ts" class="sidebar-link reco-side-_2-3-models-service-ts" data-v-b57cc07c>2.3 models.service.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_2-4-models-controller-ts" class="sidebar-link reco-side-_2-4-models-controller-ts" data-v-b57cc07c>2.4 models.controller.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_2-5-apifox-测试" class="sidebar-link reco-side-_2-5-apifox-测试" data-v-b57cc07c>2.5 Apifox 测试</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#三、prompts-可复用提示词工程" class="sidebar-link reco-side-三、prompts-可复用提示词工程" data-v-b57cc07c>三、Prompts — 可复用提示词工程</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_3-1-概念说明" class="sidebar-link reco-side-_3-1-概念说明" data-v-b57cc07c>3.1 概念说明</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_3-2-prompts-service-ts" class="sidebar-link reco-side-_3-2-prompts-service-ts" data-v-b57cc07c>3.2 prompts.service.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_3-3-prompts-controller-ts" class="sidebar-link reco-side-_3-3-prompts-controller-ts" data-v-b57cc07c>3.3 prompts.controller.ts</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#四、chains-链式调用固定任务流" class="sidebar-link reco-side-四、chains-链式调用固定任务流" data-v-b57cc07c>四、Chains — 链式调用固定任务流</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_4-1-概念说明" class="sidebar-link reco-side-_4-1-概念说明" data-v-b57cc07c>4.1 概念说明</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_4-2-chains-service-ts" class="sidebar-link reco-side-_4-2-chains-service-ts" data-v-b57cc07c>4.2 chains.service.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_4-3-chains-controller-ts" class="sidebar-link reco-side-_4-3-chains-controller-ts" data-v-b57cc07c>4.3 chains.controller.ts</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#五、agents-智能代理自主决策" class="sidebar-link reco-side-五、agents-智能代理自主决策" data-v-b57cc07c>五、Agents — 智能代理自主决策</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_5-1-概念说明" class="sidebar-link reco-side-_5-1-概念说明" data-v-b57cc07c>5.1 概念说明</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_5-2-agents-service-ts" class="sidebar-link reco-side-_5-2-agents-service-ts" data-v-b57cc07c>5.2 agents.service.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_5-3-agents-controller-ts" class="sidebar-link reco-side-_5-3-agents-controller-ts" data-v-b57cc07c>5.3 agents.controller.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_5-4-测试用例" class="sidebar-link reco-side-_5-4-测试用例" data-v-b57cc07c>5.4 测试用例</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#六、memory-多轮上下文记忆" class="sidebar-link reco-side-六、memory-多轮上下文记忆" data-v-b57cc07c>六、Memory — 多轮上下文记忆</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_6-1-概念说明" class="sidebar-link reco-side-_6-1-概念说明" data-v-b57cc07c>6.1 概念说明</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_6-2-memory-service-ts" class="sidebar-link reco-side-_6-2-memory-service-ts" data-v-b57cc07c>6.2 memory.service.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_6-3-memory-controller-ts" class="sidebar-link reco-side-_6-3-memory-controller-ts" data-v-b57cc07c>6.3 memory.controller.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_6-4-测试-验证记忆能力" class="sidebar-link reco-side-_6-4-测试-验证记忆能力" data-v-b57cc07c>6.4 测试：验证记忆能力</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#七、rag-检索增强生成" class="sidebar-link reco-side-七、rag-检索增强生成" data-v-b57cc07c>七、RAG — 检索增强生成</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_7-1-概念说明" class="sidebar-link reco-side-_7-1-概念说明" data-v-b57cc07c>7.1 概念说明</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_7-2-rag-service-ts" class="sidebar-link reco-side-_7-2-rag-service-ts" data-v-b57cc07c>7.2 rag.service.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_7-3-rag-controller-ts" class="sidebar-link reco-side-_7-3-rag-controller-ts" data-v-b57cc07c>7.3 rag.controller.ts</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#八、function-calling-工具调用" class="sidebar-link reco-side-八、function-calling-工具调用" data-v-b57cc07c>八、Function Calling — 工具调用</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_8-1-概念说明" class="sidebar-link reco-side-_8-1-概念说明" data-v-b57cc07c>8.1 概念说明</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_8-2-function-calling-service-ts" class="sidebar-link reco-side-_8-2-function-calling-service-ts" data-v-b57cc07c>8.2 function-calling.service.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_8-3-function-calling-controller-ts" class="sidebar-link reco-side-_8-3-function-calling-controller-ts" data-v-b57cc07c>8.3 function-calling.controller.ts</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#_8-4-测试用例" class="sidebar-link reco-side-_8-4-测试用例" data-v-b57cc07c>8.4 测试用例</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#九、apifox-完整测试" class="sidebar-link reco-side-九、apifox-完整测试" data-v-b57cc07c>九、Apifox 完整测试</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#所有接口汇总" class="sidebar-link reco-side-所有接口汇总" data-v-b57cc07c>所有接口汇总</a></li><li class="level-3" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#rag-测试数据-加载知识库用" class="sidebar-link reco-side-rag-测试数据-加载知识库用" data-v-b57cc07c>RAG 测试数据（加载知识库用）</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#附-app-module-ts-最终版本" class="sidebar-link reco-side-附-app-module-ts-最终版本" data-v-b57cc07c>附：app.module.ts 最终版本</a></li><li class="level-2" data-v-b57cc07c><a href="/blog/article/ai/ai09.html#附-安装命令汇总" class="sidebar-link reco-side-附-安装命令汇总" data-v-b57cc07c>附：安装命令汇总</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><canvas id="vuepress-canvas-cursor"></canvas><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      春风不语，即随本心‌。
+    </div> <div class="operation" style="right:90px;bottom:40px;display:;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:;" data-v-5775ee02></i></div> <canvas id="banniang" width="140" height="252" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div><!----><div class="RibbonAnimation"></div></div></div>
+    <script src="/blog/assets/js/app.d9f1916b.js" defer></script><script src="/blog/assets/js/7.904774fa.js" defer></script><script src="/blog/assets/js/2.412c0669.js" defer></script><script src="/blog/assets/js/1.78935ad8.js" defer></script><script src="/blog/assets/js/57.770c6b4d.js" defer></script>
+  </body>
+</html>
